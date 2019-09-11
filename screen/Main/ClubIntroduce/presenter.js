@@ -30,7 +30,7 @@ const ClubIntroduce = props => (
           },
           title: '메인사진',
           width: width,
-          height: props.imgHeight,
+          // height: props.imgHeight,
         },
         {
           source: {

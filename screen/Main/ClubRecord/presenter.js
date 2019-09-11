@@ -12,6 +12,7 @@ import MasonryList from 'react-native-masonry-list';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HeaderScrollView from 'react-native-header-scroll-view';
 import {getStatusBarHeight, ifIphoneX} from 'react-native-iphone-x-helper';
+import FastImage from 'react-native-fast-image';
 
 const {width, height} = Dimensions.get('window');
 
@@ -66,6 +67,7 @@ const ClubRecord = props => (
               onPressImage={(item, index) => {
                 props.goToPictures(item.uri);
               }}
+              customImageComponent={FastImage}
               sorted={true}
             />
           ) : (

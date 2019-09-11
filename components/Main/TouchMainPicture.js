@@ -4,9 +4,9 @@ import {
   Dimensions,
   Text,
   View,
-  Image,
   TouchableOpacity,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 
 const {width, height} = Dimensions.get('window');
 
@@ -22,7 +22,7 @@ export default class TouchMainPicture extends React.Component {
             <View style={styles.picture} backgroundColor={'#CEE1F2'} />
           ) : (
             <View style={styles.picture}>
-              <Image
+              <FastImage
                 style={styles.picture2}
                 source={{uri: this.props.clubMainPicture}}
               />
@@ -38,7 +38,7 @@ export default class TouchMainPicture extends React.Component {
                   {this.props.clubLogo === null ? (
                     <View style={styles.Image} backgroundColor={'#ADCDE9'} />
                   ) : (
-                    <Image
+                    <FastImage
                       style={styles.Image}
                       source={{uri: this.props.clubLogo}}
                     />

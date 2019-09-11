@@ -11,6 +11,7 @@ import {
 import ClubChars from '../../Char/ClubChars';
 import {moderateScale} from '../../Scaling';
 import TouchMainPicture from '../TouchMainPicture';
+import FastImage from 'react-native-fast-image';
 
 const {width, height} = Dimensions.get('window');
 
@@ -21,7 +22,7 @@ const ClubView = props => (
         {props.clubLogo === null || props.clubLogo == '' ? (
           <View style={styles.Image} backgroundColor={'#ADCDE9'} />
         ) : (
-          <Image style={styles.Image} source={{uri: props.clubLogo}} />
+          <FastImage style={styles.Image} source={{uri: props.clubLogo}} />
         )}
       </View>
 

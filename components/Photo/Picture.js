@@ -1,18 +1,37 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, Dimensions, View} from 'react-native';
-import AutoHeightImage from 'react-native-auto-height-image';
+import {StyleSheet, Text, Image, Dimensions, View} from 'react-native';
+import FastImage from 'react-native-fast-image';
 
 const {height, width} = Dimensions.get('window');
 
 export default class Pictures extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      height: 0,
+    };
+  }
+
+  componentWillMount = () => {
+    Image.getSize(this.props.picture, (width, height) => {
+      const screenWidth = Dimensions.get('window').width;
+      const getHeight = (height * screenWidth-22) / width;
+      this.setState({height: getHeight});
+    });
+  };
+
   render() {
     return (
       <>
         <View style={styles.container}>
-          <View style={styles.image}>
-            <AutoHeightImage
-              width={width - 22}
+          <View style={[styles.imageView, {height: this.state.height}]}>
+            <FastImage
+              style={{
+                width: width - 22,
+                height: this.state.height,
+              }}
               source={{uri: this.props.picture}}
+              // resizeMode={Container}
             />
           </View>
           <View style={styles.bottom}>
@@ -42,10 +61,12 @@ const styles = StyleSheet.create({
     elevation: 3,
     alignItems: 'center',
   },
-  image: {
+  imageView: {
     borderTopLeftRadius: height * 0.013,
     borderTopRightRadius: height * 0.013,
     overflow: 'hidden',
+    // backgroundColor: 'blue',
+    width: width - 22,
   },
   bottom: {
     height: height * 0.112,
