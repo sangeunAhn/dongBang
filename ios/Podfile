@@ -31,6 +31,8 @@ target 'dongBang' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
+
   target 'dongBangTests' do
     inherit! :search_paths
     # Pods for testing

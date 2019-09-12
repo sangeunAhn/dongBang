@@ -28,7 +28,15 @@ class Container extends Component {
       pictureLoading: false,
       date: '2000-01-01',
       gender: true,
+      photoPermission: '',
     };
+  }
+
+  componentDidMount() {
+    Permissions.check('photo').then(response => {
+      // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+      this.setState({photoPermission: response});
+    });
   }
 
   render() {
@@ -154,22 +162,31 @@ class Container extends Component {
   };
 
   _pickPicture = async () => {
-    setTimeout(() => {
-      this.setState({pictureLoading: true});
-    }, 1000);
-    const permissions = Permissions.CAMERA_ROLL;
-    const {status} = await Permissions.askAsync(permissions);
+    const options = {
+      title: 'Select Avatar',
+      customButtons: [{name: 'fb', title: 'Choose Photo from Facebook'}],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
 
-    if (status === 'granted') {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        quality: 0.2,
+    Permissions.request('photo').then(response => {
+      this.setState({photoPermission: response});
+    });
+
+    if (this.state.photoPermission == 'authorized') {
+      ImagePicker.launchImageLibrary(options, async response => {
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+        } else if (response.error) {
+          console.log('ImagePicker Error: ', response.error);
+        } else if (response.customButton) {
+          console.log('User tapped custom button: ', response.customButton);
+        } else {
+          this.setState({picture: response.uri});
+        }
       });
-
-      if (!result.cancelled) {
-        this.setState({picture: result.uri});
-      } else {
-        this.setState({pictureLoading: false});
-      }
     }
   };
 

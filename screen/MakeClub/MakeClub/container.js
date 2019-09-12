@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Alert} from 'react-native';
 import * as axios from 'axios';
-import * as ImagePicker from 'react-native-image-picker';
-import * as Permissions from 'react-native-permissions';
+import ImagePicker from 'react-native-image-picker';
+import Permissions from 'react-native-permissions';
 import MakeClub from './presenter';
 
 class Container extends Component {
@@ -29,10 +29,18 @@ class Container extends Component {
       isFocused3: false,
       logoLoading: false,
       mainPictureLoading: false,
+      photoPermission: '',
     };
 
     this.props.navigation.addListener('didFocus', async () => {
       this.setState({isSubmitting: false});
+    });
+  }
+
+  componentDidMount() {
+    Permissions.check('photo').then(response => {
+      // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+      this.setState({photoPermission: response});
     });
   }
 
@@ -130,43 +138,73 @@ class Container extends Component {
 
   // 로고 가져오기
   _pickLogo = async () => {
-    setTimeout(() => {
-      this.setState({logoLoading: true});
-    }, 1000);
-    const permissions = Permissions.CAMERA_ROLL;
-    const {status} = await Permissions.askAsync(permissions);
+    const options = {
+      title: 'Select Avatar',
+      customButtons: [{name: 'fb', title: 'Choose Photo from Facebook'}],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+      quality: 0.5,
+    };
 
-    if (status === 'granted') {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        quality: 0.5,
+    Permissions.request('photo').then(response => {
+      this.setState({photoPermission: response});
+    });
+
+    if (this.state.photoPermission == 'authorized') {
+      setTimeout(() => {
+        this.setState({logoLoading: true});
+      }, 1000);
+
+      ImagePicker.launchImageLibrary(options, async response => {
+        if (response.didCancel) {
+          this.setState({logoLoading: false});
+        } else if (response.error) {
+          this.setState({logoLoading: false});
+        } else if (response.customButton) {
+          this.setState({logoLoading: false});
+        } else {
+          await this.setState({clubLogo: response.uri});
+          this.setState({logoLoading: false});
+        }
       });
-
-      if (!result.cancelled) {
-        this.setState({clubLogo: result.uri});
-      } else {
-        this.setState({logoLoading: false});
-      }
     }
   };
 
   // 메인사진 가져오기
   _pickMainPicture = async () => {
-    setTimeout(() => {
-      this.setState({mainPictureLoading: true});
-    }, 1000);
-    const permissions = Permissions.CAMERA_ROLL;
-    const {status} = await Permissions.askAsync(permissions);
+    const options = {
+      title: 'Select Avatar',
+      customButtons: [{name: 'fb', title: 'Choose Photo from Facebook'}],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+      quality: 0.5,
+    };
 
-    if (status === 'granted') {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        quality: 0.5,
+    Permissions.request('photo').then(response => {
+      this.setState({photoPermission: response});
+    });
+
+    if (this.state.photoPermission == 'authorized') {
+      setTimeout(() => {
+        this.setState({mainPictureLoading: true});
+      }, 1000);
+
+      ImagePicker.launchImageLibrary(options, async response => {
+        if (response.didCancel) {
+          this.setState({mainPictureLoading: false});
+        } else if (response.error) {
+          this.setState({mainPictureLoading: false});
+        } else if (response.customButton) {
+          this.setState({mainPictureLoading: false});
+        } else {
+          await this.setState({clubMainPicture: response.uri});
+          this.setState({mainPictureLoading: false});
+        }
       });
-
-      if (!result.cancelled) {
-        this.setState({clubMainPicture: result.uri});
-      } else {
-        this.setState({mainPictureLoading: false});
-      }
     }
   };
 

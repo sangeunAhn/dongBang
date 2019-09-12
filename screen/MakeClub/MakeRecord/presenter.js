@@ -15,6 +15,7 @@ import MasonryList from 'react-native-masonry-list';
 import HeaderScrollView from 'react-native-header-scroll-view';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {getStatusBarHeight, ifIphoneX} from 'react-native-iphone-x-helper';
+import FastImage from 'react-native-fast-image';
 
 const {width, height} = Dimensions.get('window');
 
@@ -84,6 +85,7 @@ const MakeRecord = props => (
                   onPressImage={(item, index) => {
                     props.RecordRegister(item.uri);
                   }}
+                  customImageComponent={FastImage}
                   sorted={true}
                 />
               </>

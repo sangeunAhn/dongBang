@@ -19,6 +19,14 @@ export default class ClubChars extends React.Component {
       photoPermission: '',
     };
   }
+
+  componentDidMount() {
+    Permissions.check('photo').then(response => {
+      // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+      this.setState({photoPermission: response});
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -48,26 +56,41 @@ export default class ClubChars extends React.Component {
 
   // 이미지피커
   _pickImage = async () => {
-    const {photoPermission} = this.state;
-    setTimeout(() => {
-      this.props.changeAddLoading();
-    }, 1000);
 
-    await Permissions.check('photo').then(response => {
+    const options = {
+      title: 'Select Avatar',
+      customButtons: [{name: 'fb', title: 'Choose Photo from Facebook'}],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+      quality: 0.5,
+    };
+
+    Permissions.request('photo').then(response => {
       this.setState({photoPermission: response});
     });
 
-    if (photoPermission === 'authorized') {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        quality: 0.4,
-      });
+    if (this.state.photoPermission == 'authorized') {
+      setTimeout(() => {
+        this.props.changeAddLoading();
+      }, 1000);
 
-      if (!result.cancelled) {
-        await this.props.addImage(result.uri);
-        this.props.changeAddLoading();
-      } else {
-        this.props.changeAddLoading();
-      }
+      ImagePicker.launchImageLibrary(options, async response => {
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+          this.props.changeAddLoading();
+        } else if (response.error) {
+          console.log('ImagePicker Error: ', response.error);
+          this.props.changeAddLoading();
+        } else if (response.customButton) {
+          console.log('User tapped custom button: ', response.customButton);
+          this.props.changeAddLoading();
+        } else {
+          await this.props.addImage(response.uri);
+          this.props.changeAddLoading();
+        }
+      });
     }
   };
 }

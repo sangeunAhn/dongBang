@@ -15,6 +15,7 @@ import PropTypes from 'prop-types';
 import Feather from 'react-native-vector-icons/Feather';
 import Entypo from 'react-native-vector-icons/Entypo';
 import PhotoLoading from './PhotoLoding';
+import FastImage from 'react-native-fast-image';
 
 const {width, height} = Dimensions.get('window');
 
@@ -24,10 +25,24 @@ export default class PhotoModify extends React.Component {
     this.state = {
       commentValue: '',
       disabled: true,
+      height: 0,
+      photoPermission: '',
     };
   }
 
+  componentDidMount() {
+    Permissions.check('photo').then(response => {
+      // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+      this.setState({photoPermission: response});
+    });
+  }
+
   componentWillMount = async () => {
+    Image.getSize(this.props.image, (width, height) => {
+      const screenWidth = Dimensions.get('window').width;
+      const getHeight = (height * screenWidth - 20) / width;
+      this.setState({height: getHeight});
+    });
     const {comment} = this.props;
     this.setState({commentValue: comment});
   };
@@ -57,7 +72,13 @@ export default class PhotoModify extends React.Component {
             <View style={styles.body}>
               <TouchableOpacity onPress={this.Press}>
                 <View style={styles.image}>
-                  <AutoHeightImage width={width - 20} source={{uri: image}} />
+                  <FastImage
+                    style={{
+                      width: width - 20,
+                      height: this.state.height,
+                    }}
+                    source={{uri: image}}
+                  />
                 </View>
                 {this.state.disabled == true ? null : (
                   <View style={styles.box}>
@@ -109,25 +130,42 @@ export default class PhotoModify extends React.Component {
 
   // 이미지피커
   _pickImage = async () => {
-    setTimeout(() => {
-      this.props.changeUpdateLoading(id);
-    }, 1000);
-    const permissions = Permissions.CAMERA_ROLL;
-    const {status} = await Permissions.askAsync(permissions);
     const {id, updateImage} = this.props;
+    const options = {
+      title: 'Select Avatar',
+      customButtons: [{name: 'fb', title: 'Choose Photo from Facebook'}],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+      quality: 0.5,
+    };
 
-    if (status === 'granted') {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        quality: 0.5,
+    Permissions.request('photo').then(response => {
+      this.setState({photoPermission: response});
+    });
+
+    if (this.state.photoPermission == 'authorized') {
+      setTimeout(() => {
+        this.props.changeUpdateLoading(id);
+      }, 1000);
+
+      ImagePicker.launchImageLibrary(options, async response => {
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+          this.props.changeUpdateLoading(id);
+        } else if (response.error) {
+          console.log('ImagePicker Error: ', response.error);
+          this.props.changeUpdateLoading(id);
+        } else if (response.customButton) {
+          console.log('User tapped custom button: ', response.customButton);
+          this.props.changeUpdateLoading(id);
+        } else {
+          this.setState({image: response.uri, disabled: true});
+          updateImage(id, response.uri);
+          this.props.changeUpdateLoading(id);
+        }
       });
-
-      if (!result.cancelled) {
-        this.setState({image: result.uri, disabled: true});
-        updateImage(id, result.uri);
-        this.props.changeUpdateLoading(id);
-      } else {
-        this.props.changeUpdateLoading(id);
-      }
     }
   };
 }
