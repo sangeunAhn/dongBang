@@ -200,75 +200,13 @@ const SignUp = props => (
                   },
                 ]}
                 onChangeText={props.emailChange}
-                maxLength={20}
+                maxLength={40}
                 value={props.email}
                 autoCorrect={false}
                 autoCapitalize={'none'}
               />
             </View>
 
-            <View style={styles.block}>
-              <Text
-                style={[
-                  styles.text,
-                  {
-                    color: props.isFocused ? '#000000' : '#8d97a5',
-                  },
-                ]}>
-                생년월일
-              </Text>
-              <DatePicker
-                style={{width: 200}}
-                date={props.date}
-                mode="date"
-                placeholder="select date"
-                format="YYYY-MM-DD"
-                minDate="1930-01-01"
-                maxDate="2010-01-01"
-                confirmBtnText="확인"
-                cancelBtnText="취소"
-                customStyles={{
-                  dateInput: {
-                    borderColor: 'transparent',
-                  },
-                  // ... You can check the source to find the other keys.
-                }}
-                onDateChange={props.dateChange}
-              />
-            </View>
-            <View style={styles.block}>
-              <Text
-                style={[
-                  styles.text,
-                  {
-                    color: props.isFocused ? '#000000' : '#8d97a5',
-                  },
-                ]}>
-                성별
-              </Text>
-              <View style={{flexDirection: 'row'}}>
-                <CheckBox
-                  containerStyle={{
-                    marginLeft: '-2%',
-                    borderColor: 'transparent',
-                  }}
-                  left
-                  title="남자"
-                  onPress={props.genderPress}
-                  checked={props.gender}
-                />
-                <CheckBox
-                  containerStyle={{
-                    marginLeft: '-2%',
-                    borderColor: 'transparent',
-                  }}
-                  left
-                  title="여자"
-                  onPress={props.genderPress}
-                  checked={!props.gender}
-                />
-              </View>
-            </View>
             <View style={styles.block}>
               <Text
                 style={[
@@ -289,9 +227,7 @@ const SignUp = props => (
             {props.id == '' ||
             props.password == '' ||
             props.password2 == '' ||
-            props.email == '' ||
-            props.school == '' ||
-            props.picture == null ? (
+            props.email == '' ? (
               <ConfirmButtonN
                 buttonColor={'#CEE1F2'}
                 titleColor={'#BBBBBB'}

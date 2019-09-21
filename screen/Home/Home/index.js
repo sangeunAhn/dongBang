@@ -173,7 +173,7 @@ export default class example extends Component {
                   color: '#888888',
                   fontSize: height * 0.015,
                 }}>
-                v1.0.5
+                v1.0.11
               </Text>
             </View>
           </View>

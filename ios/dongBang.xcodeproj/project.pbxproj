@@ -29,6 +29,7 @@
 		73535456D5940CF189902307 /* libPods-dongBang-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A2B6675CFC5378D17408C0 /* libPods-dongBang-tvOS.a */; };
 		98E5AF15E8EC4257061039F9 /* libPods-dongBang-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E88ECF63E035B42E58B3709 /* libPods-dongBang-tvOSTests.a */; };
 		A621E353F3A54F3988DC8BB2 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61D07175A2684D318DEFB13D /* Feather.ttf */; };
+		A63F3734232E353600D35CD9 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A63F3733232E353600D35CD9 /* libBVLinearGradient.a */; };
 		C29F2067536B452E9D895DE6 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 56BD037DDAA64D9AB88C1A03 /* SimpleLineIcons.ttf */; };
 		CC23803AC2554B02BA3078A6 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74C3151B10164D33BDB25C28 /* Zocial.ttf */; };
 		DE4E15CF9DAD4C18AACFF4BD /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02AC6714C2E6425589BEEAE3 /* FontAwesome5_Brands.ttf */; };
@@ -86,6 +87,7 @@
 		78F56BC38E289E5D9EE0CF39 /* Pods-dongBang-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dongBang-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-dongBang-tvOSTests/Pods-dongBang-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		7999CB5C9EDF4C15ACECFEFA /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		832AEF73B4B74291A05331E2 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		A63F3733232E353600D35CD9 /* libBVLinearGradient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBVLinearGradient.a; path = "build/dongBang/Build/Products/Debug-iphonesimulator/BVLinearGradient/libBVLinearGradient.a"; sourceTree = "<group>"; };
 		AA200DA4537088B51D89D8A7 /* Pods-dongBangTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dongBangTests.release.xcconfig"; path = "Target Support Files/Pods-dongBangTests/Pods-dongBangTests.release.xcconfig"; sourceTree = "<group>"; };
 		B107281AE7214B434E2586EC /* Pods-dongBang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dongBang.debug.xcconfig"; path = "Target Support Files/Pods-dongBang/Pods-dongBang.debug.xcconfig"; sourceTree = "<group>"; };
 		BE836F02295640DCAB8B5368 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A63F3734232E353600D35CD9 /* libBVLinearGradient.a in Frameworks */,
 				E2934B68F777C97474FF7F25 /* libPods-dongBang.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,6 +197,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A63F3733232E353600D35CD9 /* libBVLinearGradient.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				FCB694846877E7180CEBA01A /* libPods-dongBang.a */,
@@ -350,6 +354,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = B239HL82DA;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -750,18 +755,25 @@
 			baseConfigurationReference = B107281AE7214B434E2586EC /* Pods-dongBang.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = B239HL82DA;
 				INFOPLIST_FILE = dongBang/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/dongBang/Build/Products/Debug-iphonesimulator/BVLinearGradient",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.korea.pinkravvit;
 				PRODUCT_NAME = dongBang;
+				PROVISIONING_PROFILE_SPECIFIER = dongBang;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -771,17 +783,25 @@
 			baseConfigurationReference = D8341DC451FA13C7B63A4222 /* Pods-dongBang.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = B239HL82DA;
 				INFOPLIST_FILE = dongBang/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/dongBang/Build/Products/Debug-iphonesimulator/BVLinearGradient",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.korea.pinkravvit;
 				PRODUCT_NAME = dongBang;
+				PROVISIONING_PROFILE_SPECIFIER = dongBang;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

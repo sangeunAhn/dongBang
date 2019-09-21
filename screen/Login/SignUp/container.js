@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {Alert} from 'react-native';
 import * as axios from 'axios';
-import * as ImagePicker from 'react-native-image-picker';
-import * as Permissions from 'react-native-permissions';
 import SignUp from './presenter';
 
 class Container extends Component {
@@ -18,25 +16,14 @@ class Container extends Component {
       email: '',
       picture: null,
       userNo: '',
-      school: '',
+      school: '상언대학교',
       isGetting: false,
       isSubmitting: false,
       isFocused: false,
       isFocused1: false,
       isFocused2: false,
       isFocused3: false,
-      pictureLoading: false,
-      date: '2000-01-01',
-      gender: true,
-      photoPermission: '',
     };
-  }
-
-  componentDidMount() {
-    Permissions.check('photo').then(response => {
-      // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
-      this.setState({photoPermission: response});
-    });
   }
 
   render() {
@@ -49,7 +36,6 @@ class Container extends Component {
         pwChange={this._pwChange}
         pw2Change={this._pw2Change}
         emailChange={this._emailChange}
-        dateChange={this._dateChange}
         schoolChange={this._schoolChange}
         handleFocus={this._handleFocus}
         handleBlur={this._handleBlur}
@@ -59,8 +45,6 @@ class Container extends Component {
         handleBlur2={this._handleBlur2}
         handleFocus3={this._handleFocus3}
         handleBlur3={this._handleBlur3}
-        pickPicture={this._pickPicture}
-        genderPress={this._genderPress}
       />
     );
   }
@@ -70,26 +54,13 @@ class Container extends Component {
     //userNo 가지고 오기
     const {navigation} = this.props;
 
-    const {id, password, email, date, gender, school, picture} = this.state;
-    let getGender = '';
-    if (gender == true) {
-      getGender = 'male';
-    } else {
-      getGender = 'female';
-    }
+    const {id, password, email, school} = this.state;
 
     let formData = new FormData();
     formData.append('id', id);
     formData.append('password', password);
     formData.append('email', email);
-    formData.append('date', date);
-    formData.append('gender', getGender);
     formData.append('school', school);
-    formData.append('picture', {
-      uri: picture,
-      name: 'image.jpeg',
-      type: 'image/jpeg',
-    });
 
     // 데이터베이스에 넣기
     await fetch('http://dkstkdvkf00.cafe24.com/php/SignUp/SignUp.php', {
@@ -116,6 +87,7 @@ class Container extends Component {
   _getEmail = () => {
     const {email} = this.state;
     const t = this;
+    let ms = '';
     axios
       .post('http://dkstkdvkf00.cafe24.com/php/SignUp/GetEmail.php', {
         email,
@@ -131,6 +103,7 @@ class Container extends Component {
   _getId = () => {
     const {id} = this.state;
     const t = this;
+    let ms = '';
     axios
       .post('http://dkstkdvkf00.cafe24.com/php/SignUp/GetId.php', {
         id,
@@ -161,35 +134,6 @@ class Container extends Component {
     }
   };
 
-  _pickPicture = async () => {
-    const options = {
-      title: 'Select Avatar',
-      customButtons: [{name: 'fb', title: 'Choose Photo from Facebook'}],
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-    };
-
-    Permissions.request('photo').then(response => {
-      this.setState({photoPermission: response});
-    });
-
-    if (this.state.photoPermission == 'authorized') {
-      ImagePicker.launchImageLibrary(options, async response => {
-        if (response.didCancel) {
-          console.log('User cancelled image picker');
-        } else if (response.error) {
-          console.log('ImagePicker Error: ', response.error);
-        } else if (response.customButton) {
-          console.log('User tapped custom button: ', response.customButton);
-        } else {
-          this.setState({picture: response.uri});
-        }
-      });
-    }
-  };
-
   _idChange = id => {
     this.setState({id});
   };
@@ -204,10 +148,6 @@ class Container extends Component {
 
   _emailChange = email => {
     this.setState({email});
-  };
-
-  _dateChange = date => {
-    this.setState({date});
   };
 
   _schoolChange = school => {
@@ -226,15 +166,6 @@ class Container extends Component {
 
   _handleFocus3 = () => this.setState({isFocused3: true});
   _handleBlur3 = () => this.setState({isFocused3: false});
-
-  _genderPress = () => {
-    const {gender} = this.state;
-    if (gender == true) {
-      this.setState({gender: false});
-    } else {
-      this.setState({gender: true});
-    }
-  };
 }
 
 export default Container;

@@ -17,46 +17,40 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.0.11</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Some description</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Some description</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>사용자의 음악 기능을 불러오며, 음악 기능을 사용하는데에 사용됩니다.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>사용자의 블루투스 기능을 불러오며, 블루투스를 사용하는데에 사용됩니다.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>사용자의 블루투스 기능을 불러오며, 블루투스를 사용하는데에 사용됩니다.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>사용자의 달력 기능을 불러오며, 달력을 사용하는데에 사용됩니다.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>사용자의 전화 기능을 불러오며, 앱 관리자에게 문의하는데에 사용됩니다.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app needs to be able to access your location use.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
+	<string>This app needs to be able to access your location use.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>This app needs to be able to access your motion use.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>사용자의 앨범의 사진을 불러오며, 앱에 사진을 게시하는데에 사용됩니다.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>사용자의 앨범의 사진을 불러오며, 앱에 사진을 게시하는데에 사용됩니다.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app needs to be able to access your SpeechRecognition use.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -76,5 +70,19 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>
