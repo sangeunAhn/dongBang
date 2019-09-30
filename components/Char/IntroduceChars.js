@@ -26,22 +26,12 @@ const styles = StyleSheet.create({
 	button: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		marginBottom: height*0.0145,
-		borderRadius: height*0.029,
-		height: height*0.053,
-		backgroundColor: '#FFF1ED',
-		paddingRight: height*0.026,
-		paddingLeft: height*0.026,
-		marginRight: height*0.0145,
-		shadowColor: '#000',
-		shadowOffset: { width: 0, height: 1 },
-		shadowOpacity: 0.5,
-		shadowRadius: 1,
-		elevation: 2,
+		paddingRight: width*0.02,
+		paddingLeft: width*0.02,
 		alignItems: 'center'
 	},
 	title: {
-		fontSize: height*0.018,
-		color: '#505050',
+		fontSize: height*0.017,
+		color: '#BBBBBB',
 	},
 });

@@ -20,6 +20,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HeaderScrollView from 'react-native-header-scroll-view';
 import {getStatusBarHeight, ifIphoneX} from 'react-native-iphone-x-helper';
 import AutoHeightImage from 'react-native-auto-height-image';
+import Swiper from 'react-native-swiper'
 
 const {width, height} = Dimensions.get('window');
 
@@ -41,7 +42,7 @@ const MakeClub = props => (
         </TouchableOpacity>
 
         <KeyboardAvoidingView style={{flex: 1}} behavior="padding" enabled>
-          <HeaderScrollView
+          {/* <HeaderScrollView
             headerContainerStyle={{
               justifyContent: 'center',
               alignItems: 'center',
@@ -69,7 +70,7 @@ const MakeClub = props => (
               fontSize: width * 0.09,
             }}
             fadeDirection="up"
-            title="동아리 소개">
+            title="동아리 소개"> */}
             <View style={styles.blank} />
 
             <Text style={styles.text1}>동아리 로고, 메인 사진</Text>
@@ -274,7 +275,7 @@ const MakeClub = props => (
                 />
               )}
             </View>
-          </HeaderScrollView>
+          {/* </HeaderScrollView> */}
         </KeyboardAvoidingView>
       </View>
     )}

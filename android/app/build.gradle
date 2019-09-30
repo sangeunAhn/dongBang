@@ -184,10 +184,12 @@ android {
         pickFirst '**/x86_64/libc++_shared.so'
         pickFirst '**/x86/libjsc.so'
         pickFirst '**/armeabi-v7a/libjsc.so'
+
     }
 }
 
 dependencies {
+    implementation project(':react-native-svg')
     implementation project(':react-native-linear-gradient')
     implementation project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])

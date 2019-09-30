@@ -133,15 +133,14 @@ export default class example extends Component {
           <View
             style={{
               flex: 1,
+              marginTop:height*0.03,
               justifyContent: 'flex-start',
               alignItems: 'center',
             }}>
-            <MainButton
-              // buttonColor={'#D7E8F7'}
-              title={'들어가기'}
-              titleColor={'#3B3B3B'}
-              onPress={() => this.props.navigation.navigate('Schools')}
-            />
+          
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Schools')} >
+            <Text style={{color:'#3B3B3B', fontWeight:'bold',fontSize:height*0.04}}>들어가기</Text>
+            </TouchableOpacity>
             <TouchableOpacity
               style={{marginTop: height * 0.01, padding: 10}}
               onPress={() => this.props.navigation.navigate('Login')}>
