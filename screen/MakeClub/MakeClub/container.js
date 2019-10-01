@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert} from 'react-native';
+import {Alert, PermissionsAndroid} from 'react-native';
 import * as axios from 'axios';
 import ImagePicker from 'react-native-image-picker';
 import Permissions from 'react-native-permissions';
@@ -27,8 +27,6 @@ class Container extends Component {
       isFocused1: false,
       isFocused2: false,
       isFocused3: false,
-      logoLoading: false,
-      mainPictureLoading: false,
       photoPermission: '',
     };
 
@@ -140,7 +138,6 @@ class Container extends Component {
   _pickLogo = async () => {
     const options = {
       title: 'Select Avatar',
-      customButtons: [{name: 'fb', title: 'Choose Photo from Facebook'}],
       storageOptions: {
         skipBackup: true,
         path: 'images',
@@ -148,28 +145,13 @@ class Container extends Component {
       quality: 0.5,
     };
 
-    Permissions.request('photo').then(response => {
-      this.setState({photoPermission: response});
+    // Permissions.request('photo').then(response => {
+    //   this.setState({photoPermission: response});
+    // });
+
+    ImagePicker.launchImageLibrary(options, response => {
+      this.setState({clubLogo: response.uri});
     });
-
-    if (this.state.photoPermission == 'authorized') {
-      setTimeout(() => {
-        this.setState({logoLoading: true});
-      }, 1000);
-
-      ImagePicker.launchImageLibrary(options, async response => {
-        if (response.didCancel) {
-          this.setState({logoLoading: false});
-        } else if (response.error) {
-          this.setState({logoLoading: false});
-        } else if (response.customButton) {
-          this.setState({logoLoading: false});
-        } else {
-          await this.setState({clubLogo: response.uri});
-          this.setState({logoLoading: false});
-        }
-      });
-    }
   };
 
   // 메인사진 가져오기
@@ -184,28 +166,13 @@ class Container extends Component {
       quality: 0.5,
     };
 
-    Permissions.request('photo').then(response => {
-      this.setState({photoPermission: response});
+    // Permissions.request('photo').then(response => {
+    //   this.setState({photoPermission: response});
+    // });
+
+    ImagePicker.launchImageLibrary(options, response => {
+      this.setState({clubMainPicture: response.uri});
     });
-
-    if (this.state.photoPermission == 'authorized') {
-      setTimeout(() => {
-        this.setState({mainPictureLoading: true});
-      }, 1000);
-
-      ImagePicker.launchImageLibrary(options, async response => {
-        if (response.didCancel) {
-          this.setState({mainPictureLoading: false});
-        } else if (response.error) {
-          this.setState({mainPictureLoading: false});
-        } else if (response.customButton) {
-          this.setState({mainPictureLoading: false});
-        } else {
-          await this.setState({clubMainPicture: response.uri});
-          this.setState({mainPictureLoading: false});
-        }
-      });
-    }
   };
 
   _notUpdate = () => {

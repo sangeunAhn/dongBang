@@ -20,7 +20,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HeaderScrollView from 'react-native-header-scroll-view';
 import {getStatusBarHeight, ifIphoneX} from 'react-native-iphone-x-helper';
 import AutoHeightImage from 'react-native-auto-height-image';
-import Swiper from 'react-native-swiper'
+import Swiper from 'react-native-swiper';
 
 const {width, height} = Dimensions.get('window');
 
@@ -42,7 +42,7 @@ const MakeClub = props => (
         </TouchableOpacity>
 
         <KeyboardAvoidingView style={{flex: 1}} behavior="padding" enabled>
-          {/* <HeaderScrollView
+          <HeaderScrollView
             headerContainerStyle={{
               justifyContent: 'center',
               alignItems: 'center',
@@ -70,7 +70,7 @@ const MakeClub = props => (
               fontSize: width * 0.09,
             }}
             fadeDirection="up"
-            title="동아리 소개"> */}
+            title="동아리 소개">
             <View style={styles.blank} />
 
             <Text style={styles.text1}>동아리 로고, 메인 사진</Text>
@@ -83,13 +83,9 @@ const MakeClub = props => (
                 source={require('../../../images/photoAdd.png')}
               />
 
-              {props.mainPictureLoading ? (
-                <View style={styles.MainPictureImage}>
-                  <ActivityIndicator size="large" />
-                </View>
-              ) : props.clubMainPicture == null ||
-                props.clubMainPicture == 'ul' ||
-                props.clubMainPicture == '' ? (
+              {props.clubMainPicture == null ||
+              props.clubMainPicture == 'ul' ||
+              props.clubMainPicture == '' ? (
                 <View style={styles.MainPictureImage} />
               ) : (
                 props.clubMainPicture && (
@@ -110,13 +106,9 @@ const MakeClub = props => (
                   source={require('../../../images/photoAdd.png')}
                 />
 
-                {props.logoLoading ? (
-                  <View style={styles.logoImage}>
-                    <ActivityIndicator size="large" />
-                  </View>
-                ) : props.clubLogo == null ||
-                  props.clubLogo == 'ul' ||
-                  props.clubLogo == '' ? (
+                {props.clubLogo == null ||
+                props.clubLogo == 'ul' ||
+                props.clubLogo == '' ? (
                   <View style={styles.logoImage} />
                 ) : (
                   props.clubLogo && (
@@ -275,7 +267,7 @@ const MakeClub = props => (
                 />
               )}
             </View>
-          {/* </HeaderScrollView> */}
+          </HeaderScrollView>
         </KeyboardAvoidingView>
       </View>
     )}
