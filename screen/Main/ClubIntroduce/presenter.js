@@ -11,7 +11,6 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StatusBar,
-  
 } from 'react-native';
 import IntroduceChars from '../../../components/Char/IntroduceChars';
 import HeaderScrollView from 'react-native-header-scroll-view';
@@ -23,11 +22,11 @@ import Swiper from 'react-native-swiper'
 import { Slider } from 'react-native-elements';
 
 
+
 const {width, height} = Dimensions.get('window');
 
 const ClubIntroduce = props => (
   <>
-
     <ImageView
       images={[
         {
@@ -61,7 +60,11 @@ const ClubIntroduce = props => (
             <Ionicons name="ios-arrow-back" size={width * 0.08} color="black" />
           </SafeAreaView>
         </TouchableOpacity>
-        <View style={{ alignItems:'center',  marginTop: Platform.OS === 'ios' ? 30 : 15,}}>
+        <View
+          style={{
+            alignItems: 'center',
+            marginTop: Platform.OS === 'ios' ? 30 : 15,
+          }}>
           <Text style={{fontSize: width * 0.05}}>동아리 소개</Text>
         </View>
         {/* <HeaderScrollView
@@ -193,8 +196,13 @@ const ClubIntroduce = props => (
                   <IntroduceChars key={index} char={char} />
                 ))}
               </View>
+
           </View>
 
+          <View
+            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Radar data={props.data} options={props.options} />
+          </View>
 
           <View style={{flex:1, }}>
            
@@ -267,8 +275,8 @@ const styles = StyleSheet.create({
     width: height * 0.15,
     height: height * 0.15,
     borderRadius: height * 0.15 * 0.5,
-    borderWidth:0.2,
-    borderColor:'#9F9F9F'
+    borderWidth: 0.2,
+    borderColor: '#9F9F9F',
   },
   input: {
     borderRadius: 8,

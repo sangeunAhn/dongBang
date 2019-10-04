@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {BackHandler, Image, Dimensions} from 'react-native';
 import * as axios from 'axios';
 import ClubIntroduce from './presenter';
-import { Radar } from 'react-native-pathjs-charts'
+import {Radar} from 'react-native-pathjs-charts';
 const {width, height} = Dimensions.get('window');
 
 class Container extends Component {
@@ -25,15 +25,13 @@ class Container extends Component {
       isImageViewVisible: false,
       imageViewIndex: 0,
       imgWidth: 0,
-      value:5,
-      data:[],
+      value: 5,
+      data: [],
       options: {},
     };
   }
 
   render() {
-    
-
     return (
       <ClubIntroduce
         {...this.state}
@@ -76,15 +74,17 @@ class Container extends Component {
   }
 
   _getRadarData = () => {
-    let data = [{
-      "speed": 74,
-      "balance": 29,
-      "explosives": 40,
-      "energy": 40,
-      "flexibility": 30,
-      "agility": 25,
-      "endurance": 44
-    }]
+    let data = [
+      {
+        speed: 74,
+        balance: 29,
+        explosives: 40,
+        energy: 40,
+        flexibility: 30,
+        agility: 25,
+        endurance: 44,
+      },
+    ];
 
     let options = {
       width: 290,
@@ -93,29 +93,29 @@ class Container extends Component {
         top: 20,
         left: 20,
         right: 30,
-        bottom: 20
+        bottom: 20,
       },
       r: 150,
       max: 100,
-      fill: "#2980B9",
-      stroke: "#2980B9",
+      fill: '#2980B9',
+      stroke: '#2980B9',
       animate: {
         type: 'oneByOne',
-        duration: 200
+        duration: 200,
       },
       label: {
         fontFamily: 'Arial',
         fontSize: 14,
         fontWeight: true,
         fill: '#34495E',
-        onLabelPress: this.onLabelPress
-      }
-    }
+        onLabelPress: this.onLabelPress,
+      },
+    };
     this.setState({
       data,
       options,
-    })
-  }
+    });
+  };
 
   _getDatas = async () => {
     const t = this;

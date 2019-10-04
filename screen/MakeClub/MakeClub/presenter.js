@@ -23,7 +23,6 @@ import AutoHeightImage from 'react-native-auto-height-image';
 import Swiper from 'react-native-swiper'
 import { Slider } from 'react-native-elements';
 
-
 const { width, height } = Dimensions.get('window');
 
 const MakeClub = props => (
@@ -115,6 +114,7 @@ const MakeClub = props => (
                         />
                       )
                     )}
+
               </TouchableOpacity>
 
               <View style={styles.logo}>
@@ -333,6 +333,7 @@ const MakeClub = props => (
                 </View>
               </View>
 
+
               <View style={styles.button}>
                 {props.clubName.length == 0 &&
                   props.clubPhoneNumber.length == 0 ? (
@@ -360,6 +361,7 @@ const MakeClub = props => (
           </KeyboardAvoidingView>
         </View>
       )}
+
   </>
 );
 
