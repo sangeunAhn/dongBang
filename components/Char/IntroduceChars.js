@@ -16,7 +16,7 @@ export default class CharEX extends Component {
 	render() {
 		return (
 			<View style={styles.button}>
-				<Text style={[styles.title]}>#{this.props.char}</Text>
+				<Text style={[styles.title]}># {this.props.char}</Text>
 			</View>
 		);
 	}
@@ -24,14 +24,18 @@ export default class CharEX extends Component {
 
 const styles = StyleSheet.create({
 	button: {
+		backgroundColor:'#7B99B6',
+		borderRadius:5,
 		alignItems: 'center',
 		justifyContent: 'center',
-		paddingRight: width*0.02,
-		paddingLeft: width*0.02,
+
+		paddingVertical:width*0.01,
+		paddingHorizontal:width*0.04,
+		margin:width*0.01,
 		alignItems: 'center'
 	},
 	title: {
-		fontSize: height*0.017,
-		color: '#BBBBBB',
+		fontSize: height*0.02,
+		color: 'white',
 	},
 });
