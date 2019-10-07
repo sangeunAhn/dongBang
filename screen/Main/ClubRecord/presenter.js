@@ -13,6 +13,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HeaderScrollView from 'react-native-header-scroll-view';
 import {getStatusBarHeight, ifIphoneX} from 'react-native-iphone-x-helper';
 import FastImage from 'react-native-fast-image';
+import MasonryView from '../../../components/Photo/MasonryList';
 
 const {width, height} = Dimensions.get('window');
 
@@ -58,7 +59,7 @@ const ClubRecord = props => (
           }}
           fadeDirection="up"
           title="동아리 기록">
-          {props.isGetting ? (
+          {/* {props.isGetting ? (
             <MasonryList
               backgroundColor="#FAFAFA"
               imageContainerStyle={{borderRadius: 6, marginBottom: 9}}
@@ -72,7 +73,8 @@ const ClubRecord = props => (
             />
           ) : (
             <ActivityIndicator size="large" style={styles.activityIndicator} />
-          )}
+          )} */}
+          <MasonryView {...props} />
         </HeaderScrollView>
       </View>
     </View>

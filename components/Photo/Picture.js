@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, Image, Dimensions, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  Image,
+  Dimensions,
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
 const {height, width} = Dimensions.get('window');
@@ -9,13 +16,14 @@ export default class Pictures extends React.Component {
     super(props);
     this.state = {
       height: 0,
+      loaded: false,
     };
   }
 
   componentWillMount = () => {
     Image.getSize(this.props.picture, (width, height) => {
       const screenWidth = Dimensions.get('window').width;
-      const getHeight = (height * screenWidth-22) / width;
+      const getHeight = (height * screenWidth - 22) / width;
       this.setState({height: getHeight});
     });
   };
@@ -31,9 +39,14 @@ export default class Pictures extends React.Component {
                 height: this.state.height,
               }}
               source={{uri: this.props.picture}}
-              // resizeMode={Container}
+              onLoad={this._onLoad}
             />
           </View>
+          {!this.state.loaded && (
+            <View style={[styles.imageView, {height: 300}]}>
+              <ActivityIndicator size="large" />
+            </View>
+          )}
           <View style={styles.bottom}>
             <Text style={styles.text}>{this.props.text}</Text>
           </View>
@@ -41,6 +54,10 @@ export default class Pictures extends React.Component {
       </>
     );
   }
+
+  _onLoad = () => {
+    this.setState(() => ({loaded: true}));
+  };
 }
 
 const styles = StyleSheet.create({

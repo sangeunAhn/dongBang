@@ -21,8 +21,46 @@ import FastImage from 'react-native-fast-image';
 import Swiper from 'react-native-swiper';
 import {Slider} from 'react-native-elements';
 import {Radar} from 'react-native-pathjs-charts';
+import RadarChart from 'react-native-pathjs-charts';
 
 const {width, height} = Dimensions.get('window');
+
+let data = [
+  {
+    speed: 74,
+    balance: 29,
+    explosives: 40,
+    energy: 40,
+    flexibility: 30,
+    agility: 25,
+    endurance: 44,
+  },
+];
+
+let options = {
+  width: 290,
+  height: 290,
+  margin: {
+    top: 20,
+    left: 20,
+    right: 30,
+    bottom: 20,
+  },
+  r: 150,
+  max: 100,
+  fill: '#2980B9',
+  stroke: '#2980B9',
+  animate: {
+    type: 'oneByOne',
+    duration: 200,
+  },
+  label: {
+    fontFamily: 'Arial',
+    fontSize: 14,
+    fontWeight: true,
+    fill: '#34495E',
+  },
+};
 
 const ClubIntroduce = props => (
   <>
@@ -121,7 +159,7 @@ const ClubIntroduce = props => (
 
           <View
             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Radar data={props.data} options={props.options} />
+            <Radar data={data} options={options} />
           </View>
 
           <View style={{flex: 1}}>

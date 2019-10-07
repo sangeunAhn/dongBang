@@ -108,7 +108,6 @@ class Container extends Component {
         fontSize: 14,
         fontWeight: true,
         fill: '#34495E',
-        onLabelPress: this.onLabelPress,
       },
     };
     this.setState({
