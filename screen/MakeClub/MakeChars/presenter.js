@@ -66,6 +66,19 @@ const MakeChars = props => (
           fadeDirection="up"
           title="특징 입력">
           <View style={{flex: 1}}>
+          <View style={{ marginTop:height*0.05, marginBottom:height*0.02, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                <View style={{justifyContent:'center', alignItems:'center',width:width*0.07, height:width*0.07, borderRadius:width*0.07*0.5, backgroundColor:'#8D8D8D'}}>
+                  <Text style={{fontWeight:'bold',textAlign:'center' , color:'white'}}>1</Text>
+                </View>
+                <View style={{  backgroundColor: '#BBBBBB', height: 1, width: width*0.25, marginHorizontal:7}}/>
+                <View style={{justifyContent:'center', alignItems:'center',width:width*0.07, height:width*0.07, borderRadius:width*0.07*0.5, backgroundColor:'#7B99B6'}}>
+                  <Text style={{fontWeight:'bold',textAlign:'center' , color:'white'}}>2</Text>
+                </View>
+                <View style={{  backgroundColor: '#BBBBBB', height: 1, width: width*0.25, marginHorizontal:7}}/>
+                <View style={{justifyContent:'center', alignItems:'center',width:width*0.07, height:width*0.07, borderRadius:width*0.07*0.5, backgroundColor:'#8D8D8D'}}>
+                  <Text style={{fontWeight:'bold',textAlign:'center' , color:'white'}}>3</Text>
+                </View>
+              </View>
             {props.count >= 8 ? (
               <View style={{height: '5%'}} />
             ) : (
@@ -185,10 +198,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAFAFA',
   },
   contain: {
-    height: '25%',
+    height: '100%',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'flex-end',
+    justifyContent:'center',
+    alignItems: 'flex-start',
   },
 });
 

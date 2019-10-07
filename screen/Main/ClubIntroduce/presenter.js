@@ -21,8 +21,6 @@ import FastImage from 'react-native-fast-image';
 import Swiper from 'react-native-swiper';
 import {Slider} from 'react-native-elements';
 import {Radar} from 'react-native-pathjs-charts';
-import RadarChart from 'react-native-pathjs-charts';
-
 const {width, height} = Dimensions.get('window');
 
 let data = [
@@ -104,8 +102,36 @@ const ClubIntroduce = props => (
           }}>
           <Text style={{fontSize: width * 0.05}}>동아리 소개</Text>
         </View>
+        {/* <HeaderScrollView
+          headerContainerStyle={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            ...ifIphoneX({paddingTop: 18}, {paddingTop: 0}),
+            height: Platform.OS === 'ios' ? height * 0.1 : height * 0.08,
+          }}
+          headlineStyle={{
+            height: height * 0.1,
+            textAlign: 'center',
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignSelf: 'center',
+            fontSize: width * 0.05,
+            paddingTop: Platform.OS === 'ios' ? height * 0.055 : height * 0.048,
+          }}
+          headerComponentContainerStyle={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: height * 0.08,
+          }}
+          titleStyle={{
+            // paddingTop: Platform.OS === 'ios' ? 15 : 0,
+            color: '#3B3B3B',
+            fontSize: width * 0.09,
+          }}
+          fadeDirection="up"
+          title="동아리 소개"> */}
 
-        <Swiper>
+        <Swiper loop={false}>
           <View
             style={{
               flex: 1,
@@ -150,6 +176,150 @@ const ClubIntroduce = props => (
               }}>
               {props.clubName}
             </Text>
+          </View>
+
+          <View
+            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
+              }}>
+              <Text
+                style={{
+                  color: '#003964',
+                  width: width * 0.2,
+                  textAlign: 'center',
+                  fontSize: width * 0.035,
+                }}>
+                소규모
+              </Text>
+              <Slider
+                disabled={true}
+                value={0.5}
+                style={{width: width * 0.6}}
+                minimumTrackTintColor="#E5E5E5"
+                maximumTrackTintColor="#E5E5E5"
+                thumbTintColor="#ADCDE9"
+                thumbStyle={{width: 15, height: 15, borderRadius: 3}}
+                trackStyle={{height: 2}}
+              />
+              <Text
+                style={{
+                  color: '#580000',
+                  width: width * 0.2,
+                  textAlign: 'center',
+                  fontSize: width * 0.035,
+                }}>
+                대규모
+              </Text>
+            </View>
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
+              }}>
+              <Text
+                style={{
+                  color: '#003964',
+                  width: width * 0.2,
+                  textAlign: 'center',
+                  fontSize: width * 0.035,
+                }}>
+                자율적인
+              </Text>
+              <Slider
+                disabled={true}
+                value={0.5}
+                style={{width: width * 0.6}}
+                minimumTrackTintColor="#E5E5E5"
+                maximumTrackTintColor="#E5E5E5"
+                thumbTintColor="#ADCDE9"
+                thumbStyle={{width: 15, height: 15, borderRadius: 3}}
+                trackStyle={{height: 2}}
+              />
+              <Text
+                style={{
+                  color: '#580000',
+                  width: width * 0.2,
+                  textAlign: 'center',
+                  fontSize: width * 0.035,
+                }}>
+                체계적인
+              </Text>
+            </View>
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
+              }}>
+              <Text
+                style={{
+                  color: '#003964',
+                  width: width * 0.2,
+                  textAlign: 'center',
+                  fontSize: width * 0.035,
+                }}>
+                재미있는
+              </Text>
+              <Slider
+                disabled={true}
+                value={0.5}
+                style={{width: width * 0.6}}
+                minimumTrackTintColor="#E5E5E5"
+                maximumTrackTintColor="#E5E5E5"
+                thumbTintColor="#ADCDE9"
+                thumbStyle={{width: 15, height: 15, borderRadius: 3}}
+                trackStyle={{height: 2}}
+              />
+              <Text
+                style={{
+                  color: '#580000',
+                  width: width * 0.2,
+                  textAlign: 'center',
+                  fontSize: width * 0.035,
+                }}>
+                진지한
+              </Text>
+            </View>
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
+              }}>
+              <Text
+                style={{
+                  color: '#003964',
+                  width: width * 0.2,
+                  textAlign: 'center',
+                  fontSize: width * 0.035,
+                }}>
+                친목도모
+              </Text>
+              <Slider
+                disabled={true}
+                value={0.5}
+                style={{width: width * 0.6}}
+                minimumTrackTintColor="#E5E5E5"
+                maximumTrackTintColor="#E5E5E5"
+                thumbTintColor="#ADCDE9"
+                thumbStyle={{width: 15, height: 15, borderRadius: 3}}
+                trackStyle={{height: 2}}
+              />
+              <Text
+                style={{
+                  color: '#580000',
+                  width: width * 0.2,
+                  textAlign: 'center',
+                  fontSize: width * 0.035,
+                }}>
+                활동중심
+              </Text>
+            </View>
             <View style={styles.chars}>
               {props.clubChar.map((char, index) => (
                 <IntroduceChars key={index} char={char} />
@@ -181,6 +351,7 @@ const ClubIntroduce = props => (
             </ScrollView>
           </View>
         </Swiper>
+        {/* </HeaderScrollView> */}
       </View>
     ) : (
       <ActivityIndicator size="large" style={styles.activityIndicator} />
@@ -208,7 +379,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     width: width * 0.8,
-    marginTop: height * 0.01,
+    marginTop: height * 0.05,
   },
   blank: {
     width: width,

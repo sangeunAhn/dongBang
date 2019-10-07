@@ -14,10 +14,10 @@ import RecordButton from '../../../components/Button/RecordButton';
 import MasonryList from 'react-native-masonry-list';
 import HeaderScrollView from 'react-native-header-scroll-view';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {getStatusBarHeight, ifIphoneX} from 'react-native-iphone-x-helper';
+import { getStatusBarHeight, ifIphoneX } from 'react-native-iphone-x-helper';
 import FastImage from 'react-native-fast-image';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const MakeRecord = props => (
   <>
@@ -36,7 +36,7 @@ const MakeRecord = props => (
           <SafeAreaView>
             <Text
               style={{
-                ...ifIphoneX({paddingTop: 5}, {paddingTop: 0}),
+                ...ifIphoneX({ paddingTop: 5 }, { paddingTop: 0 }),
                 fontSize: width * 0.05,
                 color: '#3B3B3B',
                 fontWeight: '600',
@@ -50,7 +50,7 @@ const MakeRecord = props => (
             headerContainerStyle={{
               justifyContent: 'center',
               alignItems: 'center',
-              ...ifIphoneX({paddingTop: 18}, {paddingTop: 0}),
+              ...ifIphoneX({ paddingTop: 18 }, { paddingTop: 0 }),
               height: Platform.OS === 'ios' ? height * 0.1 : height * 0.08,
             }}
             headlineStyle={{
@@ -75,11 +75,25 @@ const MakeRecord = props => (
             }}
             fadeDirection="up"
             title="기록 생성">
+            <View style={{ marginTop: height * 0.05, marginBottom: height * 0.02, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{ justifyContent: 'center', alignItems: 'center', width: width * 0.07, height: width * 0.07, borderRadius: width * 0.07 * 0.5, backgroundColor: '#8D8D8D' }}>
+                <Text style={{ fontWeight: 'bold', textAlign: 'center', color: 'white' }}>1</Text>
+              </View>
+              <View style={{ backgroundColor: '#BBBBBB', height: 1, width: width * 0.25, marginHorizontal: 7 }} />
+              <View style={{ justifyContent: 'center', alignItems: 'center', width: width * 0.07, height: width * 0.07, borderRadius: width * 0.07 * 0.5, backgroundColor: '#8D8D8D' }}>
+                <Text style={{ fontWeight: 'bold', textAlign: 'center', color: 'white' }}>2</Text>
+              </View>
+              <View style={{ backgroundColor: '#BBBBBB', height: 1, width: width * 0.25, marginHorizontal: 7 }} />
+              <View style={{ justifyContent: 'center', alignItems: 'center', width: width * 0.07, height: width * 0.07, borderRadius: width * 0.07 * 0.5, backgroundColor: '#7B99B6' }}>
+                <Text style={{ fontWeight: 'bold', textAlign: 'center', color: 'white' }}>3</Text>
+              </View>
+            </View>
+
             {props.count >= 1 ? (
               <>
                 <MasonryList
                   backgroundColor="#FAFAFA"
-                  imageContainerStyle={{borderRadius: 6, marginBottom: 9}}
+                  imageContainerStyle={{ borderRadius: 6, marginBottom: 9 }}
                   spacing={2}
                   images={props.listRecords}
                   onPressImage={(item, index) => {
@@ -90,27 +104,29 @@ const MakeRecord = props => (
                 />
               </>
             ) : (
-              <>
-                <View
-                  style={{
-                    width: width,
-                    paddingTop: height * 0.01,
-                    height: height * 0.6,
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                  }}>
-                  <Text
+                <>
+                  <View
                     style={{
-                      fontSize: width * 0.05,
-                      color: '#BBBBBB',
-                      textAlign: 'center',
-                      alignSelf: 'center',
+                      width: width,
+                      paddingTop: height * 0.01,
+                      height: height * 0.6,
+                      justifyContent: 'center',
+                      alignContent: 'center',
                     }}>
-                    최소 1개 이상 기록해야 합니다.
+                    <Text
+                      style={{
+                        fontSize: width * 0.035,
+                        color: '#BBBBBB',
+                        textAlign: 'center',
+                        alignSelf: 'center',
+                      }}>
+                        
+                      이용자들에게 보여줄 여러분들의 활동 사진들을 올려주세요.{"\n"}
+                      (없으시면 나중에 올리셔도 됩니다.)
                   </Text>
-                </View>
-              </>
-            )}
+                  </View>
+                </>
+              )}
           </HeaderScrollView>
 
           {/* 완료버튼 */}
@@ -119,14 +135,14 @@ const MakeRecord = props => (
             {props.count >= 1 ? (
               <RecordButton onPress={props.btnPress} />
             ) : (
-              <RecordButtonN />
-            )}
+                <RecordButtonN />
+              )}
           </View>
         </View>
       </>
     ) : (
-      <ActivityIndicator size="large" style={styles.activityIndicator} />
-    )}
+        <ActivityIndicator size="large" style={styles.activityIndicator} />
+      )}
   </>
 );
 
