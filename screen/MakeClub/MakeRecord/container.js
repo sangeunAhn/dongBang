@@ -71,7 +71,7 @@ class Container extends React.Component {
 
     // 데이터 가져오기
     await axios
-      .post('http://dkstkdvkf00.cafe24.com/php/MakeClub/GetImageRooms.php', {
+      .post('http://13.209.221.206/php/MakeClub/GetImageRooms.php', {
         userNo: userNo,
       })
       .then(async result => {
@@ -95,7 +95,7 @@ class Container extends React.Component {
 
     // 데이터 가져오기
     await axios
-      .post('http://dkstkdvkf00.cafe24.com/php/MakeClub/GetImages.php', {
+      .post('http://13.209.221.206/php/MakeClub/GetImages.php', {
         userNo: userNo,
         imageRoom: imageRoom,
       })
@@ -116,7 +116,7 @@ class Container extends React.Component {
     var t = this;
     var userNo = this.props.navigation.getParam('userNo', 'NO-ID');
     await axios
-      .post('http://dkstkdvkf00.cafe24.com/php/MakeClub/GetRecordPicture.php', {
+      .post('http://13.209.221.206/php/MakeClub/GetRecordPicture.php', {
         recordPicture: item,
       })
       .then(function(response) {
@@ -134,7 +134,7 @@ class Container extends React.Component {
     var t = this;
     var userNo = this.props.navigation.getParam('userNo', 'NO-ID');
     axios
-      .post('http://dkstkdvkf00.cafe24.com/php/MakeClub/GetSchool.php', {
+      .post('http://13.209.221.206/php/MakeClub/GetSchool.php', {
         userNo: userNo,
       })
       .then(function(response) {

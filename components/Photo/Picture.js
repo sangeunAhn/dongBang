@@ -16,7 +16,7 @@ export default class Pictures extends React.Component {
     super(props);
     this.state = {
       height: 0,
-      loaded: false,
+      onLoad: false,
     };
   }
 
@@ -42,8 +42,8 @@ export default class Pictures extends React.Component {
               onLoad={this._onLoad}
             />
           </View>
-          {!this.state.loaded && (
-            <View style={[styles.imageView, {height: 300}]}>
+          {!this.state.onLoad && (
+            <View style={[styles.imageView]}>
               <ActivityIndicator size="large" />
             </View>
           )}
@@ -56,7 +56,7 @@ export default class Pictures extends React.Component {
   }
 
   _onLoad = () => {
-    this.setState(() => ({loaded: true}));
+    this.setState(() => ({onLoad: true}));
   };
 }
 
@@ -82,8 +82,10 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: height * 0.013,
     borderTopRightRadius: height * 0.013,
     overflow: 'hidden',
-    // backgroundColor: 'blue',
+    backgroundColor: '#dcdde1',
     width: width - 22,
+    height: 200,
+    justifyContent: 'center',
   },
   bottom: {
     height: height * 0.112,

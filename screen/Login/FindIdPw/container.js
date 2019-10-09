@@ -49,7 +49,7 @@ class Container extends React.Component {
 			Alert.alert('이메일을 입력해주세요');
 		} else {
 			axios
-				.post('http://dkstkdvkf00.cafe24.com/php/FindIdPw/FindId.php', {
+				.post('http://13.209.221.206/php/FindIdPw/FindId.php', {
 					email: idEmail,
 				})
 				.then(function(response) {
@@ -71,7 +71,7 @@ class Container extends React.Component {
 			Alert.alert('모두 입력해주세요');
 		} else {
 			axios
-				.post('http://dkstkdvkf00.cafe24.com/php/FindIdPw/FindPw.php', {
+				.post('http://13.209.221.206/php/FindIdPw/FindPw.php', {
 					id: pwId,
 					email: pwEmail,
 				})

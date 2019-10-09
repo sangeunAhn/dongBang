@@ -33,7 +33,7 @@ class Container extends React.Component {
     const {id} = this.state;
 
     axios
-      .post('http://dkstkdvkf00.cafe24.com/php/Login/GetUserNo.php', {
+      .post('http://13.209.221.206/php/Login/GetUserNo.php', {
         id,
       })
       .then(function(response) {
@@ -49,7 +49,7 @@ class Container extends React.Component {
     const {id} = this.state;
 
     axios
-      .post('http://dkstkdvkf00.cafe24.com/php/Login/GetUserNo.php', {
+      .post('http://13.209.221.206/php/Login/GetUserNo.php', {
         id,
       })
       .then(function(response) {
@@ -72,7 +72,7 @@ class Container extends React.Component {
     const {id} = this.state;
     const t = this;
     axios
-      .post('http://dkstkdvkf00.cafe24.com/php/Login/LoginGetClub.php', {
+      .post('http://13.209.221.206/php/Login/LoginGetClub.php', {
         id,
       })
       .then(function(response) {
@@ -87,7 +87,7 @@ class Container extends React.Component {
     const {id, password} = this.state;
     const t = this;
     axios
-      .post('http://dkstkdvkf00.cafe24.com/php/Login/Login.php', {
+      .post('http://13.209.221.206/php/Login/Login.php', {
         id,
         password,
       })

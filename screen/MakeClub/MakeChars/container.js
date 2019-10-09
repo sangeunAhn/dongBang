@@ -69,7 +69,7 @@ class Container extends React.Component {
     const t = this;
     // 데이터 가져오기
     axios
-      .post('http://dkstkdvkf00.cafe24.com/php/MakeClub/GetChars.php', {
+      .post('http://13.209.221.206/php/MakeClub/GetChars.php', {
         userNo: userNo,
       })
       .then(response => {
@@ -194,7 +194,7 @@ class Container extends React.Component {
     formData.append('chars', char);
     formData.append('userNo', userNo);
 
-    await fetch('http://dkstkdvkf00.cafe24.com/php/MakeClub/SetClubChars.php', {
+    await fetch('http://13.209.221.206/php/MakeClub/SetClubChars.php', {
       method: 'POST',
       body: formData,
       header: {
@@ -210,7 +210,7 @@ class Container extends React.Component {
     var userNo = navigation.getParam('userNo', 'NO-ID');
 
     await axios.post(
-      'http://dkstkdvkf00.cafe24.com/php/MakeClub/DeleteClubChars.php',
+      'http://13.209.221.206/php/MakeClub/DeleteClubChars.php',
       {
         userNo: userNo,
       },
