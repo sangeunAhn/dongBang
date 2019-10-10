@@ -45,7 +45,6 @@ class Container extends Component {
   componentWillMount = () => {
     this._getDatas();
     this._getChars();
-   
 
     BackHandler.addEventListener(
       'hardwareBackPress',
@@ -72,8 +71,6 @@ class Container extends Component {
       this._handleBackButtonClick,
     );
   }
-
-  
 
   _getDatas = async () => {
     const t = this;
@@ -109,6 +106,20 @@ class Container extends Component {
     clubIntroduce = clubIntroduce.replace(/\\n/gi, '\n');
     this.setState({
       clubIntroduce: clubIntroduce,
+    });
+
+    var str = JSON.stringify(response.data.message.clubLogo);
+    var clubLogo = str.substring(1, str.length - 1);
+    clubLogo = clubLogo.replace(/\\n/gi, '\n');
+    this.setState({
+      clubLogo: clubLogo,
+    });
+
+    var str = JSON.stringify(response.data.message.clubMainPicture);
+    var clubMainPicture = str.substring(1, str.length - 1);
+    clubMainPicture = clubMainPicture.replace(/\\n/gi, '\n');
+    this.setState({
+      clubMainPicture: clubMainPicture,
     });
   };
 

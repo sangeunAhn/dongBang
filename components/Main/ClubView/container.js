@@ -47,8 +47,6 @@ export default class Container extends Component {
     this.props.navigation.navigate('ClubIntroduce', {
       clubName: this.props.clubName,
       school: this.props.school,
-      clubLogo: this.props.clubLogo,
-      clubMainPicture: this.props.clubMainPicture,
     });
   };
 
