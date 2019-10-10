@@ -209,12 +209,9 @@ class Container extends React.Component {
     const t = this;
     var userNo = navigation.getParam('userNo', 'NO-ID');
 
-    await axios.post(
-      'http://13.209.221.206/php/MakeClub/DeleteClubChars.php',
-      {
-        userNo: userNo,
-      },
-    );
+    await axios.post('http://13.209.221.206/php/MakeClub/DeleteClubChars.php', {
+      userNo: userNo,
+    });
 
     await Promise.all(
       Object.values(chars).map(char => t._inputDatas(char.id, char.char)),
