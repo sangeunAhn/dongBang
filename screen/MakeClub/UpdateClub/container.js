@@ -33,7 +33,7 @@ export default class ClubModify extends React.Component {
     let formData = new FormData();
     formData.append('userNo', userNo);
 
-    await fetch('http://dkstkdvkf00.cafe24.com/php/Login/deleteUser.php', {
+    await fetch('http://13.209.221.206/php/Login/deleteUser.php', {
       method: 'POST',
       body: formData,
       header: {

@@ -31,7 +31,7 @@ class Container extends Component {
 
     // 데이터 가져오기
     await axios
-      .post('http://dkstkdvkf00.cafe24.com/php/Main/FindClubs.php', {
+      .post('http://13.209.221.206/php/Main/FindClubs.php', {
         school: school,
         clubKind: clubKind,
       })

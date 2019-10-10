@@ -85,7 +85,7 @@ class Container extends Component {
 
     // 데이터 가져오기
     await axios
-      .post('http://dkstkdvkf00.cafe24.com/php/Main/GetClubIntroduce.php', {
+      .post('http://13.209.221.206/php/Main/GetClubIntroduce.php', {
         clubName: clubName,
         school: school,
       })
@@ -122,7 +122,7 @@ class Container extends Component {
 
     // 데이터 가져오기
     await axios
-      .post('http://dkstkdvkf00.cafe24.com/php/Main/GetClubChars.php', {
+      .post('http://13.209.221.206/php/Main/GetClubChars.php', {
         clubName: clubName,
         school: school,
       })

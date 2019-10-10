@@ -66,7 +66,7 @@ export default class Container extends Component {
 
     // 데이터 가져오기
     axios
-      .post('http://dkstkdvkf00.cafe24.com/php/Main/GetClubChars.php', {
+      .post('http://13.209.221.206/php/Main/GetClubChars.php', {
         clubName: clubName,
         school: school,
       })

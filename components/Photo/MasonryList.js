@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   record: {
     marginBottom: 11,
-    borderRadius: 7,
+    borderRadius: 10,
   },
   leftView: {
     flex: 1,

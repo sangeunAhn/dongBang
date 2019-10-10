@@ -45,7 +45,7 @@ class Container extends React.Component {
     const t = this;
     // 데이터 가져오기
     await axios
-      .post('http://dkstkdvkf00.cafe24.com/php/Main/GetRecordPictureM.php', {
+      .post('http://13.209.221.206/php/Main/GetRecordPictureM.php', {
         recordNo: recordNo,
       })
       .then(function(response) {

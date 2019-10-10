@@ -63,7 +63,7 @@ class Container extends Component {
     formData.append('school', school);
 
     // 데이터베이스에 넣기
-    await fetch('http://dkstkdvkf00.cafe24.com/php/SignUp/SignUp.php', {
+    await fetch('http://13.209.221.206/php/SignUp/SignUp.php', {
       method: 'POST',
       body: formData,
       header: {
@@ -89,7 +89,7 @@ class Container extends Component {
     const t = this;
     let ms = '';
     axios
-      .post('http://dkstkdvkf00.cafe24.com/php/SignUp/GetEmail.php', {
+      .post('http://13.209.221.206/php/SignUp/GetEmail.php', {
         email,
       })
       .then(function(response) {
@@ -105,7 +105,7 @@ class Container extends Component {
     const t = this;
     let ms = '';
     axios
-      .post('http://dkstkdvkf00.cafe24.com/php/SignUp/GetId.php', {
+      .post('http://13.209.221.206/php/SignUp/GetId.php', {
         id,
       })
       .then(function(response) {

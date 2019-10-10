@@ -81,7 +81,7 @@ class Container extends Component {
 
     // 데이터 가져오기
     await axios
-      .post('http://dkstkdvkf00.cafe24.com/php/MakeClub/GetRegister.php', {
+      .post('http://13.209.221.206/php/MakeClub/GetRegister.php', {
         userNo: userNo,
       })
       .then(response => {
@@ -181,7 +181,7 @@ class Container extends Component {
     getUserNo = getUserNo.replace(/[^0-9]/g, '');
     const t = this;
     axios
-      .post('http://dkstkdvkf00.cafe24.com/php/MakeClub/GetClubExist.php', {
+      .post('http://13.209.221.206/php/MakeClub/GetClubExist.php', {
         userNo: getUserNo,
       })
       .then(function(response) {
@@ -212,6 +212,7 @@ class Container extends Component {
       clubLogo,
       clubMainPicture,
     } = this.state;
+
 
     if (clubName == '' || clubPhoneNumber == '' || clubIntroduce == '') {
       Alert.alert('내용을 채워주세요');
@@ -246,16 +247,13 @@ class Container extends Component {
       }
 
       // 데이터베이스에 넣기
-      await fetch(
-        'http://dkstkdvkf00.cafe24.com/php/MakeClub/UserRegister.php',
-        {
-          method: 'POST',
-          body: formData,
-          header: {
-            'content-type': 'multipart/form-data',
-          },
+      await fetch('http://13.209.221.206/php/MakeClub/MakeClub.php', {
+        method: 'POST',
+        body: formData,
+        header: {
+          'content-type': 'multipart/form-data',
         },
-      );
+      });
 
       this.props.navigation.navigate('MakeChars', {
         userNo: getUserNo,
@@ -311,16 +309,13 @@ class Container extends Component {
       }
 
       // 텍스트 정보 넣기
-      await fetch(
-        'http://dkstkdvkf00.cafe24.com/php/MakeClub/ModifySignUp.php',
-        {
-          method: 'POST',
-          body: formData,
-          header: {
-            'content-type': 'multipart/form-data',
-          },
+      await fetch('http://13.209.221.206/php/MakeClub/UpdateClub.php', {
+        method: 'POST',
+        body: formData,
+        header: {
+          'content-type': 'multipart/form-data',
         },
-      );
+      });
       if (this.props.navigation.getParam('from', 'NO-ID') == 'm') {
         this.props.navigation.goBack();
       } else {
@@ -338,16 +333,13 @@ class Container extends Component {
     formData.append('clubLogo', prevClubLogo);
     formData.append('clubMainPicture', prevClubMainPicture);
 
-    await fetch(
-      'http://dkstkdvkf00.cafe24.com/php/MakeClub/DeleteClubImages.php',
-      {
-        method: 'POST',
-        body: formData,
-        header: {
-          'content-type': 'multipart/form-data',
-        },
+    await fetch('http://13.209.221.206/php/MakeClub/DeleteClubImages.php', {
+      method: 'POST',
+      body: formData,
+      header: {
+        'content-type': 'multipart/form-data',
       },
-    );
+    });
   };
 
   _btnPress = async () => {

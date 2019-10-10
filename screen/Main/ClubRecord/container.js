@@ -116,7 +116,7 @@ class Container extends React.Component {
 
     // 데이터 가져오기
     await axios
-      .post('http://dkstkdvkf00.cafe24.com/php/Main/GetImageRooms2.php', {
+      .post('http://13.209.221.206/php/Main/GetImageRooms2.php', {
         clubName: clubName,
         school: school,
       })
@@ -139,7 +139,7 @@ class Container extends React.Component {
 
     // 데이터 가져오기
     await axios
-      .post('http://dkstkdvkf00.cafe24.com/php/Main/GetImages2.php', {
+      .post('http://13.209.221.206/php/Main/GetImages2.php', {
         clubName: clubName,
         school: school,
         imageRoom: imageRoom,
@@ -162,7 +162,7 @@ class Container extends React.Component {
     const clubName = this.props.navigation.getParam('clubName', 'NO-ID');
     const school = this.props.navigation.getParam('school', 'NO-ID');
     await axios
-      .post('http://dkstkdvkf00.cafe24.com/php/Main/GetRecordPicture.php', {
+      .post('http://13.209.221.206/php/Main/GetRecordPicture.php', {
         recordPicture: item,
       })
       .then(function(response) {

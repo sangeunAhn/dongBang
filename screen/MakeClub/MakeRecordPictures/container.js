@@ -163,7 +163,7 @@ export default class RecordRegister extends React.Component {
     // 데이터 가져오기
     await axios
       .post(
-        'http://dkstkdvkf00.cafe24.com/php/MakeClub/GetRecordPictureM.php',
+        'http://13.209.221.206/php/MakeClub/GetRecordPictureM.php',
         {
           recordNo: recordNo,
         },
@@ -200,7 +200,7 @@ export default class RecordRegister extends React.Component {
     const recordNo = navigation.getParam('recordNo', 'NO-ID');
     const t = this;
     await axios
-      .post('http://dkstkdvkf00.cafe24.com/php/MakeClub/GetPrevRecords.php', {
+      .post('http://13.209.221.206/php/MakeClub/GetPrevRecords.php', {
         recordNo: recordNo,
       })
       .then(async response => {
@@ -211,7 +211,7 @@ export default class RecordRegister extends React.Component {
   _deleteDatas = async response => {
     for (const item of response.data) {
       await axios.post(
-        'http://dkstkdvkf00.cafe24.com/php/MakeClub/DeletePrevRecords.php',
+        'http://13.209.221.206/php/MakeClub/DeletePrevRecords.php',
         {
           recordPicture: item.recordPicture,
         },
@@ -247,7 +247,7 @@ export default class RecordRegister extends React.Component {
     formData.append('createdAt', createdAt);
 
     // 데이터베이스에 넣기
-    await fetch('http://dkstkdvkf00.cafe24.com/php/MakeClub/SetRecord.php', {
+    await fetch('http://13.209.221.206/php/MakeClub/SetRecord.php', {
       method: 'POST',
       body: formData,
       header: {

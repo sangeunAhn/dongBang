@@ -47,7 +47,7 @@ class Container extends React.Component {
 		formData.append('pw', pw);
 		formData.append('userNo', userNo);
 
-		await fetch('http://dkstkdvkf00.cafe24.com/php/Login/ChangePw.php', {
+		await fetch('http://13.209.221.206/php/Login/ChangePw.php', {
 			method: 'POST',
 			body: formData,
 			header: {
