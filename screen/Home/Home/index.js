@@ -21,6 +21,8 @@ import styles, {colors} from '../../../components/Snap/index.style';
 import {ENTRIES1, ENTRIES2} from '../../../components/Snap/entries';
 import MainButton from '../../../components/Button/MainButton';
 import Modal from 'react-native-simple-modal';
+import RNKakaoLogins from 'react-native-kakao-logins';
+
 
 const {width, height} = Dimensions.get('window');
 
@@ -34,6 +36,18 @@ function wp(percentage) {
 }
 
 export default class example extends Component {
+
+  kakaoLogin = () => {
+    RNKakaoLogins.login((err, result) => {
+      if (err) {
+        Alert.alert('error', err.toString());
+        return;
+      }
+      Alert.alert('result', JSON.stringify(result));
+    });
+  };
+
+
   state = {open: false};
   openModal = () => this.setState({open: true});
 
@@ -159,7 +173,7 @@ export default class example extends Component {
             <View style={{alignItems: 'flex-start'}}>
               <TouchableOpacity
                 style={{padding: height * 0.02}}
-                onPress={this.openModal}>
+                onPress={() => this.kakaoLogin()}>
                 <Text style={{color: '#888888', fontSize: height * 0.018}}>
                   문의하기
                 </Text>

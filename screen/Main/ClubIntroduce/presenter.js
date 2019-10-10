@@ -20,7 +20,7 @@ import ImageView from 'react-native-image-view';
 import FastImage from 'react-native-fast-image';
 import Swiper from 'react-native-swiper';
 import {Slider} from 'react-native-elements';
-import {Radar} from 'react-native-pathjs-charts';
+
 const {width, height} = Dimensions.get('window');
 
 let data = [
@@ -327,10 +327,7 @@ const ClubIntroduce = props => (
             </View>
           </View>
 
-          <View
-            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Radar data={data} options={options} />
-          </View>
+         
 
           <View style={{flex: 1}}>
             <ScrollView
