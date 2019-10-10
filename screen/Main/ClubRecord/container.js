@@ -106,6 +106,16 @@ class Container extends React.Component {
     });
   };
 
+  _getRecordHeight = async () => {
+    const items = [];
+    for (const item of this.state.listRecords) {
+      const {uri} = item;
+      const [height] = await this._getImageSize(uri);
+      items.push({uri, height});
+    }
+    this.setState({recordHeights: items});
+  };
+
   _getImageRoom = async () => {
     //userNo 가지고 오기
     const {navigation} = this.props;

@@ -23,7 +23,6 @@ import MainButton from '../../../components/Button/MainButton';
 import Modal from 'react-native-simple-modal';
 import RNKakaoLogins from 'react-native-kakao-logins';
 
-
 const {width, height} = Dimensions.get('window');
 
 const IS_ANDROID = Platform.OS === 'android';
@@ -36,7 +35,6 @@ function wp(percentage) {
 }
 
 export default class example extends Component {
-
   kakaoLogin = () => {
     RNKakaoLogins.login((err, result) => {
       if (err) {
@@ -46,7 +44,6 @@ export default class example extends Component {
       Alert.alert('result', JSON.stringify(result));
     });
   };
-
 
   state = {open: false};
   openModal = () => this.setState({open: true});
@@ -147,13 +144,20 @@ export default class example extends Component {
           <View
             style={{
               flex: 1,
-              marginTop:height*0.03,
+              marginTop: height * 0.03,
               justifyContent: 'flex-start',
               alignItems: 'center',
             }}>
-          
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Schools')} >
-            <Text style={{color:'#3B3B3B', fontWeight:'bold',fontSize:height*0.04}}>들어가기</Text>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Schools')}>
+              <Text
+                style={{
+                  color: '#3B3B3B',
+                  fontWeight: 'bold',
+                  fontSize: height * 0.04,
+                }}>
+                들어가기
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{marginTop: height * 0.01, padding: 10}}

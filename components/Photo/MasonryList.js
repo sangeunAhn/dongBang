@@ -41,7 +41,11 @@ export default class MasonryList extends React.Component {
           {Object.values(this.props.leftRecords).map((record, index) => (
             <TouchableOpacity
               key={index}
-              onPress={() => this.props.goToPictures(record.uri)}>
+              onPress={() =>
+                this.props.from == 'update'
+                  ? this.props.RecordRegister(record.uri)
+                  : this.props.goToPictures(record.uri)
+              }>
               <FastImage
                 key={index}
                 style={[
@@ -60,7 +64,11 @@ export default class MasonryList extends React.Component {
           {Object.values(this.props.rightRecords).map((record, index) => (
             <TouchableOpacity
               key={index}
-              onPress={() => this.props.goToPictures(record.uri)}>
+              onPress={() =>
+                this.props.from == 'update'
+                  ? this.props.RecordRegister(record.uri)
+                  : this.props.goToPictures(record.uri)
+              }>
               <FastImage
                 key={index}
                 style={[

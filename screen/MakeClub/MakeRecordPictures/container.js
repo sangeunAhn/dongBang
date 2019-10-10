@@ -176,7 +176,7 @@ export default class RecordRegister extends React.Component {
   };
   _setDatas = async response => {
     const t = this;
-    for (item of response.data) {
+    for (var item of response.data) {
       await t._addImageM(
         item.recordPicture,
         item.recordContent,
@@ -198,6 +198,7 @@ export default class RecordRegister extends React.Component {
   _deletePrevDatas = async () => {
     const {navigation} = this.props;
     const recordNo = navigation.getParam('recordNo', 'NO-ID');
+    console.log(recordNo);
     const t = this;
     await axios
       .post('http://13.209.221.206/php/MakeClub/GetPrevRecords.php', {
@@ -210,6 +211,7 @@ export default class RecordRegister extends React.Component {
 
   _deleteDatas = async response => {
     for (const item of response.data) {
+      console.log(item.recordPicture, 'ddddddd');
       await axios.post(
         'http://13.209.221.206/php/MakeClub/DeletePrevRecords.php',
         {
@@ -231,7 +233,6 @@ export default class RecordRegister extends React.Component {
   };
 
   _inputDatas = async (image, comment, createdAt, imageRoom) => {
-    console.log(image);
     const {navigation} = this.props;
     var userNo = navigation.getParam('userNo', 'NO-ID');
 
@@ -301,6 +302,5 @@ export default class RecordRegister extends React.Component {
             return {...newState};
           });
     }
-    console.log(updateLoading);
   };
 }
