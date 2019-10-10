@@ -22,7 +22,7 @@ import {ENTRIES1, ENTRIES2} from '../../../components/Snap/entries';
 import MainButton from '../../../components/Button/MainButton';
 import Modal from 'react-native-simple-modal';
 import RNKakaoLogins from 'react-native-kakao-logins';
-
+import { LoginButton, AccessToken } from 'react-native-fbsdk';
 
 const {width, height} = Dimensions.get('window');
 
@@ -163,6 +163,23 @@ export default class example extends Component {
                 동아리 생성 / 수정{' '}
               </Text>
             </TouchableOpacity>
+            <LoginButton
+          onLoginFinished={
+            (error, result) => {
+              if (error) {
+                console.log("login has error: " + result.error);
+              } else if (result.isCancelled) {
+                console.log("login is cancelled.");
+              } else {
+                AccessToken.getCurrentAccessToken().then(
+                  (data) => {
+                    console.log(data.accessToken.toString())
+                  }
+                )
+              }
+            }
+          }
+          onLogoutFinished={() => console.log("logout.")}/>
           </View>
           <View
             style={{
