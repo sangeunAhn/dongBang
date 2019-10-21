@@ -14,16 +14,10 @@ export default class ClubModify extends React.Component {
         gotoSignUp={this._gotoSignUp}
         gotoChar={this._gotoChar}
         gotoRecord={this._gotoRecord}
-        changePw={this._changePw}
         goodBye={this._goodBye}
       />
     );
   }
-  _changePw = () => {
-    this.props.navigation.navigate('ChangePW', {
-      userNo,
-    });
-  };
 
   _deleteUser = async () => {
     const {navigation} = this.props;

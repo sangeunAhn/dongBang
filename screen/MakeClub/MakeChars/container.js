@@ -109,7 +109,7 @@ class Container extends React.Component {
     });
   };
 
-  componentDidMount = () => {
+  UNSAFE_componentDidMount = () => {
     AsyncStorage.getItem('chars').then(data => {
       const chars = JSON.parse(data || '[]');
       this.setState({chars});

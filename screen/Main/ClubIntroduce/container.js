@@ -28,6 +28,10 @@ class Container extends Component {
       value: 5,
       data: [],
       options: {},
+      clubSize: 0.5,
+      clubAutonomous: 0.5,
+      clubFunny: 0.5,
+      clubFriendship: 0.5,
     };
   }
 
@@ -94,32 +98,46 @@ class Container extends Component {
   };
 
   _setDatas = response => {
-    var str = JSON.stringify(response.data.message.clubPhoneNumber);
-    var clubPhoneNumber = str.substring(1, str.length - 1);
+    var clubPhoneNumber = response.data.message.clubPhoneNumber;
     clubPhoneNumber = clubPhoneNumber.replace(/\\n/gi, '\n');
     this.setState({
       clubPhoneNumber: clubPhoneNumber,
     });
 
-    var str = JSON.stringify(response.data.message.clubIntroduce);
-    var clubIntroduce = str.substring(1, str.length - 1);
+    var clubIntroduce = response.data.message.clubIntroduce;
     clubIntroduce = clubIntroduce.replace(/\\n/gi, '\n');
     this.setState({
       clubIntroduce: clubIntroduce,
     });
 
-    var str = JSON.stringify(response.data.message.clubLogo);
-    var clubLogo = str.substring(1, str.length - 1);
-    clubLogo = clubLogo.replace(/\\n/gi, '\n');
+    var clubLogo = response.data.message.clubLogo_high;
     this.setState({
       clubLogo: clubLogo,
     });
 
-    var str = JSON.stringify(response.data.message.clubMainPicture);
-    var clubMainPicture = str.substring(1, str.length - 1);
-    clubMainPicture = clubMainPicture.replace(/\\n/gi, '\n');
+    var clubMainPicture = response.data.message.clubMainPicture_high;
     this.setState({
       clubMainPicture: clubMainPicture,
+    });
+
+    var clubSize = response.data.message.clubSize * 1;
+    this.setState({
+      clubSize: clubSize,
+    });
+
+    var clubAutonomous = response.data.message.clubAutonomous * 1;
+    this.setState({
+      clubAutonomous: clubAutonomous,
+    });
+
+    var clubFunny = response.data.message.clubFunny * 1;
+    this.setState({
+      clubFunny: clubFunny,
+    });
+
+    var clubFriendship = response.data.message.clubFriendship * 1;
+    this.setState({
+      clubFriendship: clubFriendship,
     });
   };
 
