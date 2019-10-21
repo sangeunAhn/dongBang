@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS === 'ios' ? height * 0.1 : height * 0.07,
     marginLeft: width * 0.05,
     marginBottom: height * 0.02,
-    fontSize: width * 0.09,
+    fontSize: width * 0.07,
     fontWeight: '700',
   },
   schools: {

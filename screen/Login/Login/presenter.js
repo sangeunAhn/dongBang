@@ -7,102 +7,65 @@ import {
   Text,
   Platform,
   SafeAreaView,
+  Animated,
+  Image,
+  ImageBackground
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {TextField} from 'react-native-material-textfield';
-import LoginButton from '../../../components/Button/LoginButton';
+
 import HeaderScrollView from 'react-native-header-scroll-view';
 import {ifIphoneX} from 'react-native-iphone-x-helper';
 import LinearGradient from 'react-native-linear-gradient';
+import * as Animatable from 'react-native-animatable';
+import { LoginButton, AccessToken } from 'react-native-fbsdk';
+import RNKakaoLogins from 'react-native-kakao-logins';
+
 
 const {width, height} = Dimensions.get('window');
+kakaoLogin = () => {
+  RNKakaoLogins.login((err, result) => {
+    if (err) {
+      Alert.alert('error', err.toString());
+      return;
+    }
+    Alert.alert('result', JSON.stringify(result));
+  });
+};
 
 const Login = props => (
   <>
+  <ImageBackground  imageStyle= {{opacity:0.5}}style={{backgroundColor:'black',flex:1,alignSelf: 'stretch'}} source={require('../../../images/back.jpg')}>
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => {
-          props.navigation.goBack();
-        }}>
-        <SafeAreaView>
-          <Ionicons name="ios-arrow-back" size={width * 0.08} color="black" />
-        </SafeAreaView>
-      </TouchableOpacity>
-      <HeaderScrollView
-        headerContainerStyle={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          ...ifIphoneX({paddingTop: 18}, {paddingTop: 0}),
-          height: Platform.OS === 'ios' ? height * 0.1 : height * 0.08,
-        }}
-        headlineStyle={{
-          height: height * 0.1,
-          textAlign: 'center',
-          justifyContent: 'center',
-          alignItems: 'center',
-          alignSelf: 'center',
-          fontSize: width * 0.05,
-          paddingTop: Platform.OS === 'ios' ? height * 0.055 : height * 0.048,
-        }}
-        headerComponentContainerStyle={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: height * 0.08,
-        }}
-        titleStyle={{
-          color: '#3B3B3B',
-          fontSize: width * 0.09,
-        }}
-        fadeDirection="up"
-        title="로그인">
-        <View style={styles.container2}>
-          <TextField
-            titleFontSize={height * 0.015}
-            label="아이디"
-            labelFontSize={height * 0.018}
-            returnKeyType={'done'}
-            autoCorrect={false}
-            autoCapitalize={'none'}
-            value={props.id}
-            multiline={false}
-            onChangeText={props.idChange}
-            fontSize={height * 0.023}
-          />
-          <TextField
-            titleFontSize={height * 0.015}
-            label="비밀번호"
-            secureTextEntry={true}
-            labelFontSize={height * 0.018}
-            returnKeyType={'done'}
-            autoCorrect={false}
-            autoCapitalize={'none'}
-            value={props.pw}
-            multiline={false}
-            onChangeText={props.pwChange}
-            fontSize={height * 0.023}
-          />
-          <View style={styles.loginButton}>
-            <LoginButton title={'로그인'} onPress={props.login} />
-          </View>
-          <View style={styles.password} />
-          <View style={styles.and}>
-            <View style={styles.andLineLeft} />
-            <Text style={{fontSize: height * 0.02}}>또는</Text>
-            <View style={styles.andLineRight} />
-          </View>
-          <TouchableOpacity style={styles.signUpButton} onPress={props.signUp}>
-            <LinearGradient
-              colors={['#53D8E1', '#1F8476']}
-              style={styles.signUpButton2}>
-              <View style={styles.signUpButton}>
-                <Text style={styles.signUpText}>동아리회장 계정 만들기</Text>
-              </View>
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
-      </HeaderScrollView>
+      
+        <Animatable.Text animation='fadeInUp' duration={4000} useNativeDriver={true} style={{color:'white', fontSize:width*0.1}}>대학교 모임이 {"\n"}궁금할땐?</Animatable.Text>
+     
+       <Animatable.View style={{marginTop:height*0.2, alignItems:'center'}}animation='fadeIn' delay={3000} duration={3000} useNativeDriver={true}>
+        <LoginButton
+       
+          onLoginFinished={
+            (error, result) => {
+              if (error) {
+                console.log("login has error: " + result.error);
+              } else if (result.isCancelled) {
+                console.log("login is cancelled.");
+              } else {
+                AccessToken.getCurrentAccessToken().then(
+                  (data) => {
+                    console.log(data.accessToken.toString())
+                  }
+                )
+              }
+            }
+          }
+          onLogoutFinished={() => console.log("logout.")}/>
+        <TouchableOpacity  style={{flexDirection:'row', alignItems:'center',marginTop:30, backgroundColor: '#F7E314' , width:width*0.55, height:height*0.06}}onPress={() => this.kakaoLogin()}> 
+           <Image style={{width:width*0.1, height:height*0.04}}source={require('../../../images/kakao.png')} />
+            <Text style={{color: '#3C1E1E', fontWeight: 'bold'}}>카카오톡으로 로그인</Text>
+        </TouchableOpacity>
+          </Animatable.View>
     </View>
+    </ImageBackground>
   </>
 );
 
@@ -117,8 +80,10 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#FAFAFA',
+   
+    alignItems:'center',
+    justifyContent:'center',
+    
   },
   container2: {
     paddingHorizontal: '7%',

@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     paddingTop: height * 0.015,
     fontWeight: 'bold',
     color: '#ADCDE9',
-    fontSize: height * 0.037,
+    fontSize: height * 0.03,
   },
   line: {
     borderBottomWidth: height * 0.001,

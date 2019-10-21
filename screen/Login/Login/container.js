@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert} from 'react-native';
+import {Alert,Animated} from 'react-native';
 import * as axios from 'axios';
 import Login from './presenter';
 
@@ -13,8 +13,15 @@ class Container extends React.Component {
     this.state = {
       id: '',
       password: '',
+      value: new Animated.Value(0),
+      position: new Animated.ValueXY({x:0, y:400}),
+      
     };
   }
+  componentDidMount(){
+    this._moveX();
+  }
+
   render() {
     return (
       <Login
@@ -24,9 +31,35 @@ class Container extends React.Component {
         signUp={this._signUp}
         idChange={this._idChange}
         pwChange={this._pwChange}
+        fadeIn={this._fadeIn}
+        getStyle={this._getStyle}
+        moveX={this._moveX}
       />
     );
   }
+ 
+  _moveX = () => {
+    Animated.decay (
+      this.state.position, {
+        toValue : {x:0, y:1},
+        velocity : 0.1
+        // deceleration : 0.1
+    }).start();
+  }
+
+ 
+
+  _getStyle = () => {
+    
+    return {
+      transform:[
+        
+        {translateY:this.state.position.y},
+      ]
+      
+    }
+  }
+
 
   _goToUpdateClub = () => {
     const t = this;
