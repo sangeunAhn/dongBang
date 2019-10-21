@@ -27,7 +27,7 @@ export default class Main extends Component {
     };
   }
 
-  componentWillMount = () => {
+  UNSAFE_componentWillMount = () => {
     BackHandler.addEventListener(
       'hardwareBackPress',
       this._handleBackButtonClick,
@@ -38,7 +38,7 @@ export default class Main extends Component {
     this.setState({schoolName: schoolName});
   };
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     BackHandler.removeEventListener(
       'hardwareBackPress',
       this._handleBackButtonClick,

@@ -7855,6 +7855,11 @@ rimraf@~2.2.6:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
 
+rn-kakao-login@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/rn-kakao-login/-/rn-kakao-login-2.0.1.tgz#f10697a21db4f6b578c6078c3d4fa4541beccf4c"
+  integrity sha512-9KrKl1yA90FjVj0eFnXD8Er9t8x3ua/dfukgNesYaXGyvotReJficfOUiRaBR4hdqP0uhXSSBvCbGk5v+ZDEoQ==
+
 roarr@^2.14.1:
   version "2.14.1"
   resolved "https://registry.yarnpkg.com/roarr/-/roarr-2.14.1.tgz#812b51c352debbeda1c0ae984aeaf396e0abf421"

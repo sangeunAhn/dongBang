@@ -34,7 +34,7 @@ class Container extends React.Component {
     );
   }
 
-  componentWillMount = async () => {
+  UNSAFE_componentWillMount = async () => {
     await this._getImageRoom();
     const {imageRoom} = this.state;
     const t = this;
@@ -57,7 +57,7 @@ class Container extends React.Component {
     this._distinguishHeight();
   };
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     BackHandler.removeEventListener(
       'hardwareBackPress',
       this._handleBackButtonClick,
@@ -159,7 +159,7 @@ class Container extends React.Component {
         var recordArray = new Array();
         await Promise.all(
           response.map(async row => {
-            await recordArray.push({uri: row.recordPicture});
+            await recordArray.push({uri: row.recordPicture_low});
           }),
         );
         await t.setState({records: [...this.state.records, ...recordArray]});
@@ -169,19 +169,14 @@ class Container extends React.Component {
 
   _goToPictures = async item => {
     const t = this;
-    const clubName = this.props.navigation.getParam('clubName', 'NO-ID');
-    const school = this.props.navigation.getParam('school', 'NO-ID');
     await axios
       .post('http://13.209.221.206/php/Main/GetRecordPicture.php', {
-        recordPicture: item,
+        recordPicture_low: item,
       })
       .then(function(response) {
         const recordNo = response.data.message.recordNo;
         t.props.navigation.navigate('RecordPictures', {
           recordNo: recordNo,
-          image: item,
-          clubName: clubName,
-          school: school,
         });
       });
   };

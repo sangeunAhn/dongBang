@@ -55,14 +55,6 @@ const UpdateClub = props => (
             bottom: 20,
           }}>
           <TouchableOpacity
-            style={{paddingBottom: height * 0.005, paddingLeft: height * 0.01}}
-            onPress={props.changePw}>
-            <Text
-              style={{color: '#888888', fontSize: height * 0.018, padding: 4}}>
-              비밀번호 변경하기
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
             style={{padding: height * 0.01}}
             onPress={props.goodBye}>
             <Text

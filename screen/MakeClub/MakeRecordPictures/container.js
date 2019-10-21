@@ -44,17 +44,17 @@ export default class RecordRegister extends React.Component {
     );
   }
 
-  componentWillMount = async () => {
+  UNSAFE_componentWillMount = async () => {
     BackHandler.addEventListener(
       'hardwareBackPress',
       this._handleBackButtonClick,
     );
-    if (this.props.navigation.getParam('to', 'NO-ID') == 'm') {
+    if (this.props.navigation.getParam('to', 'NO-ID') === 'm') {
       await this._getDatas();
     }
   };
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     BackHandler.removeEventListener(
       'hardwareBackPress',
       this._handleBackButtonClick,
@@ -162,12 +162,9 @@ export default class RecordRegister extends React.Component {
 
     // 데이터 가져오기
     await axios
-      .post(
-        'http://13.209.221.206/php/MakeClub/GetRecordPictureM.php',
-        {
-          recordNo: recordNo,
-        },
-      )
+      .post('http://13.209.221.206/php/MakeClub/GetRecordPictureM.php', {
+        recordNo: recordNo,
+      })
       .then(function(response) {
         t._setDatas(response);
       });
@@ -178,7 +175,7 @@ export default class RecordRegister extends React.Component {
     const t = this;
     for (var item of response.data) {
       await t._addImageM(
-        item.recordPicture,
+        item.recordPicture_high,
         item.recordContent,
         item.createdAt,
       );
@@ -189,7 +186,7 @@ export default class RecordRegister extends React.Component {
     const {navigation} = this.props;
     this.setState({isSubmitting: true});
     await this._input1();
-    if (navigation.getParam('to', 'NO-ID') == 'm') {
+    if (navigation.getParam('to', 'NO-ID') === 'm') {
       await this._deletePrevDatas();
     }
     this.props.navigation.navigate('MakeRecord');
@@ -198,7 +195,6 @@ export default class RecordRegister extends React.Component {
   _deletePrevDatas = async () => {
     const {navigation} = this.props;
     const recordNo = navigation.getParam('recordNo', 'NO-ID');
-    console.log(recordNo);
     const t = this;
     await axios
       .post('http://13.209.221.206/php/MakeClub/GetPrevRecords.php', {
@@ -210,12 +206,12 @@ export default class RecordRegister extends React.Component {
   };
 
   _deleteDatas = async response => {
-    for (const item of response.data) {
-      console.log(item.recordPicture, 'ddddddd');
+    for (var item of response.data) {
       await axios.post(
         'http://13.209.221.206/php/MakeClub/DeletePrevRecords.php',
         {
-          recordPicture: item.recordPicture,
+          recordPicture_high: item.recordPicture_high,
+          recordPicture_low: item.recordPicture_low,
         },
       );
     }
@@ -237,7 +233,12 @@ export default class RecordRegister extends React.Component {
     var userNo = navigation.getParam('userNo', 'NO-ID');
 
     let formData = new FormData();
-    formData.append('image', {
+    formData.append('low_image', {
+      uri: image,
+      name: 'image.jpeg',
+      type: 'image/jpeg',
+    });
+    formData.append('high_image', {
       uri: image,
       name: 'image.jpeg',
       type: 'image/jpeg',

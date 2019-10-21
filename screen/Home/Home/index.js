@@ -21,7 +21,7 @@ import styles, {colors} from '../../../components/Snap/index.style';
 import {ENTRIES1, ENTRIES2} from '../../../components/Snap/entries';
 import MainButton from '../../../components/Button/MainButton';
 import Modal from 'react-native-simple-modal';
-import RNKakaoLogins from 'react-native-kakao-logins';
+import RNKakao from 'rn-kakao-login';
 
 import {LoginButton, AccessToken} from 'react-native-fbsdk';
 
@@ -37,14 +37,17 @@ function wp(percentage) {
 }
 
 export default class example extends Component {
-  kakaoLogin = () => {
-    RNKakaoLogins.login((err, result) => {
-      if (err) {
-        Alert.alert('error', err.toString());
-        return;
-      }
-      Alert.alert('result', JSON.stringify(result));
-    });
+  kakaoLogin = async () => {
+    try {
+      const result = await RNKakao.login();
+      this.setState({
+        userInfo: JSON.stringify(result),
+      });
+    } catch (e) {
+      this.setState({
+        userInfo: `Error: ${e}`,
+      });
+    }
   };
 
   state = {open: false};

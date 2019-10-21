@@ -11,11 +11,9 @@ import {
 } from 'react-native';
 import RecordButtonN from '../../../components/Button/RecordButtonN';
 import RecordButton from '../../../components/Button/RecordButton';
-import MasonryList from 'react-native-masonry-list';
 import HeaderScrollView from 'react-native-header-scroll-view';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {getStatusBarHeight, ifIphoneX} from 'react-native-iphone-x-helper';
-import FastImage from 'react-native-fast-image';
 import MasonryView from '../../../components/Photo/MasonryList';
 
 const {width, height} = Dimensions.get('window');
@@ -156,8 +154,8 @@ const MakeRecord = props => (
               </View>
             </View>
 
-            {/* {props.count >= 1 ? (
-              <> */}
+            {props.count >= 1 ? (
+              <>
                 {/* <MasonryList
                   backgroundColor="#FAFAFA"
                   imageContainerStyle={{borderRadius: 6, marginBottom: 9}}
@@ -170,7 +168,7 @@ const MakeRecord = props => (
                   sorted={true}
                 /> */}
                 <MasonryView {...props} from={'update'} />
-              {/* </>
+              </>
             ) : (
               <>
                 <View
@@ -194,7 +192,7 @@ const MakeRecord = props => (
                   </Text>
                 </View>
               </>
-            )} */}
+            )}
           </HeaderScrollView>
 
           {/* 완료버튼 */}
@@ -209,7 +207,9 @@ const MakeRecord = props => (
         </View>
       </>
     ) : (
-      <ActivityIndicator size="large" style={styles.activityIndicator} />
+      <View style={styles.loading}>
+        <ActivityIndicator size="large" />
+      </View>
     )}
   </>
 );
@@ -269,10 +269,11 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: '#fff',
   },
-  activityIndicator: {
-    flex: 1,
-    alignItems: 'center',
+  loading: {
+    width,
+    height: height * 0.7,
     justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

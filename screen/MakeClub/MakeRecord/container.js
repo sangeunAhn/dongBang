@@ -12,7 +12,6 @@ class Container extends React.Component {
     this._handleBackButtonClick = this._handleBackButtonClick.bind(this);
     this.state = {
       records: [],
-      listRecords: [],
       count: 0,
       isGetting: false,
       imageRoom: [],
@@ -28,13 +27,12 @@ class Container extends React.Component {
       const t = this;
 
       if (imageRoom.length !== 0) {
-        for (const item of imageRoom) {
+        for (var item of imageRoom) {
           await t._getDatas(item);
         }
       } else {
         this.setState({isGetting: true});
       }
-      await this.setState({listRecords: this.state.records});
       this.setState({isGetting: true});
 
       await this._getRecordHeight();
@@ -54,14 +52,14 @@ class Container extends React.Component {
     );
   }
 
-  componentWillMount = () => {
+  UNSAFE_componentWillMount = () => {
     BackHandler.addEventListener(
       'hardwareBackPress',
       this._handleBackButtonClick,
     );
   };
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     BackHandler.removeEventListener(
       'hardwareBackPress',
       this._handleBackButtonClick,
@@ -102,7 +100,7 @@ class Container extends React.Component {
 
   _getRecordHeight = async () => {
     const items = [];
-    for (const item of this.state.listRecords) {
+    for (var item of this.state.records) {
       const {uri} = item;
       const [height] = await this._getImageSize(uri);
       items.push({uri, height});
@@ -124,7 +122,7 @@ class Container extends React.Component {
       })
       .then(async result => {
         const response = result.data;
-        for (room of response) {
+        for (var room of response) {
           await imageRoomArray.push(room.imageRoom);
           await t.setState({
             count: this.state.count + 1,
@@ -152,7 +150,7 @@ class Container extends React.Component {
         var recordArray = new Array();
         await Promise.all(
           response.map(async row => {
-            await recordArray.push({uri: row.recordPicture});
+            await recordArray.push({uri: row.recordPicture_low});
             await t.setState({count: this.state.count + 1});
           }),
         );
@@ -194,7 +192,7 @@ class Container extends React.Component {
   };
 
   _btnPress = () => {
-    if (this.props.navigation.getParam('from', 'NO-ID') == 'm') {
+    if (this.props.navigation.getParam('from', 'NO-ID') === 'm') {
       this.props.navigation.goBack();
     } else {
       this._goToMain();
@@ -209,7 +207,6 @@ class Container extends React.Component {
 
   _handleBackButtonClick = () => {
     this.props.navigation.goBack();
-
     return true;
   };
 }

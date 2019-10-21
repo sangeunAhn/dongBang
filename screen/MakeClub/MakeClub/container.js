@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert, PermissionsAndroid} from 'react-native';
+import {Alert, PermissionsAndroid, Image} from 'react-native';
 import * as axios from 'axios';
 import ImagePicker from 'react-native-image-picker';
 import Permissions from 'react-native-permissions';
@@ -16,10 +16,14 @@ class Container extends Component {
       clubKind: '예술 공연',
       clubPhoneNumber: '',
       clubIntroduce: '',
-      clubLogo: null,
-      clubMainPicture: null,
-      prevClubLogo: null,
-      prevClubMainPicture: null,
+      clubLogo_low: null,
+      clubMainPicture_low: null,
+      prevClubLogo_low: null,
+      prevClubMainPicture_low: null,
+      clubLogo_high: null,
+      clubMainPicture_high: null,
+      prevClubLogo_high: null,
+      prevClubMainPicture_high: null,
       userNo: '',
       isGetting: false,
       isSubmitting: false,
@@ -28,6 +32,10 @@ class Container extends Component {
       isFocused2: false,
       isFocused3: false,
       photoPermission: '',
+      clubSize: 0.5,
+      clubAutonomous: 0.5,
+      clubFunny: 0.5,
+      clubFriendship: 0.5,
     };
 
     this.props.navigation.addListener('didFocus', async () => {
@@ -35,7 +43,7 @@ class Container extends Component {
     });
   }
 
-  componentDidMount() {
+  UNSAFE_componentDidMount() {
     Permissions.check('photo').then(response => {
       // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
       this.setState({photoPermission: response});
@@ -54,6 +62,10 @@ class Container extends Component {
         clubNameChange={this._clubNameChange}
         clubIntroduceChange={this._clubIntroduceChange}
         clubPhoneNumberChange={this._clubPhoneNumberChange}
+        clubSizeChange={this._clubSizeChange}
+        clubAutonomousChange={this._clubAutonomousChange}
+        clubFunnyChange={this._clubFunnyChange}
+        clubFriendshipChange={this._clubFriendshipChange}
         handleFocus={this._handleFocus}
         handleBlur={this._handleBlur}
         handleFocus1={this._handleFocus1}
@@ -91,44 +103,74 @@ class Container extends Component {
 
   // 데이터 넣기
   _setDatas = async response => {
-    var str = JSON.stringify(response.data.message.clubName);
-    var clubName = str.substring(1, str.length - 1);
+    var clubName = response.data.message.clubName;
     await this.setState({
       clubName,
     });
 
-    var str = JSON.stringify(response.data.message.clubKind);
-    var clubKind = str.substring(1, str.length - 1);
+    var clubKind = response.data.message.clubKind;
     await this.setState({
       clubKind,
     });
 
-    var str = JSON.stringify(response.data.message.clubPhoneNumber);
-    var clubPhoneNumber = str.substring(1, str.length - 1);
+    var clubPhoneNumber = response.data.message.clubPhoneNumber;
     clubPhoneNumber = clubPhoneNumber.replace(/\\n/gi, '\n');
     await this.setState({
       clubPhoneNumber,
     });
 
-    var str = JSON.stringify(response.data.message.clubIntroduce);
-    var clubIntroduce = str.substring(1, str.length - 1);
+    var clubIntroduce = response.data.message.clubIntroduce;
     clubIntroduce = clubIntroduce.replace(/\\n/gi, '\n');
     await this.setState({
       clubIntroduce,
     });
 
-    var str = JSON.stringify(response.data.message.clubLogo);
-    var clubLogo = str.substring(1, str.length - 1);
+    var clubSize = response.data.message.clubSize * 1;
     await this.setState({
-      clubLogo: clubLogo,
-      prevClubLogo: clubLogo,
+      clubSize,
     });
 
-    var str = JSON.stringify(response.data.message.clubMainPicture);
-    var clubMainPicture = str.substring(1, str.length - 1);
+    var clubAutonomous = response.data.message.clubAutonomous * 1;
     await this.setState({
-      clubMainPicture: clubMainPicture,
-      prevClubMainPicture: clubMainPicture,
+      clubAutonomous,
+    });
+
+    var clubFunny = response.data.message.clubFunny * 1;
+    await this.setState({
+      clubFunny,
+    });
+
+    var clubFriendship = response.data.message.clubFriendship * 1;
+    await this.setState({
+      clubFriendship,
+    });
+
+    var clubLogo_low = response.data.message.clubLogo_low;
+    await this.setState({
+      clubLogo_low,
+      prevClubLogo_low: clubLogo_low,
+    });
+
+    var clubMainPicture_low = response.data.message.clubMainPicture_low;
+    await this.setState({
+      clubMainPicture_low,
+      prevClubMainPicture_low: clubMainPicture_low,
+    });
+
+    var clubLogo_high = response.data.message.clubLogo_high;
+    await this.setState({
+      clubLogo_high,
+      prevClubLogo_high: clubLogo_high,
+    });
+
+    var clubMainPicture_high = response.data.message.clubMainPicture_high;
+    await this.setState({
+      clubMainPicture_high,
+      prevClubMainPicture_high: clubMainPicture_high,
+    });
+
+    Image.getSize(this.state.clubLogo_high, (width, height) => {
+      console.log(width, height);
     });
 
     this.setState({isGetting: true});
@@ -142,7 +184,7 @@ class Container extends Component {
         skipBackup: true,
         path: 'images',
       },
-      quality: 0.5,
+      quality: 0.4,
     };
 
     // Permissions.request('photo').then(response => {
@@ -150,7 +192,10 @@ class Container extends Component {
     // });
 
     ImagePicker.launchImageLibrary(options, response => {
-      this.setState({clubLogo: response.uri});
+      Image.getSize(response.uri, (width, height) => {
+        console.log(width, height);
+      });
+      this.setState({clubLogo_high: response.uri, clubLogo_low: response.uri});
     });
   };
 
@@ -163,7 +208,7 @@ class Container extends Component {
         skipBackup: true,
         path: 'images',
       },
-      quality: 0.5,
+      quality: 0.4,
     };
 
     // Permissions.request('photo').then(response => {
@@ -171,7 +216,10 @@ class Container extends Component {
     // });
 
     ImagePicker.launchImageLibrary(options, response => {
-      this.setState({clubMainPicture: response.uri});
+      this.setState({
+        clubMainPicture_high: response.uri,
+        clubMainPicture_low: response.uri,
+      });
     });
   };
 
@@ -184,19 +232,20 @@ class Container extends Component {
       .post('http://13.209.221.206/php/MakeClub/GetClubExist.php', {
         userNo: getUserNo,
       })
-      .then(function(response) {
-        result = response.data.message;
+      .then(async function(response) {
+        var result = response.data.message;
 
         if (result === 'true') {
-          t._updatRegister();
+          await t._updateClub();
+          t._deleteImages();
         } else {
-          t._insertRegister();
+          t._makeClub();
         }
       });
   };
 
   // 처음 가입
-  _insertRegister = async () => {
+  _makeClub = async () => {
     //userNo 가지고 오기
     const {navigation} = this.props;
     var getUserNo = navigation.getParam('userNo', 'NO-ID');
@@ -209,12 +258,15 @@ class Container extends Component {
       clubKind,
       clubPhoneNumber,
       clubIntroduce,
-      clubLogo,
-      clubMainPicture,
+      clubLogo_high,
+      clubMainPicture_high,
+      clubSize,
+      clubAutonomous,
+      clubFunny,
+      clubFriendship,
     } = this.state;
 
-
-    if (clubName == '' || clubPhoneNumber == '' || clubIntroduce == '') {
+    if (clubName === '' || clubPhoneNumber === '' || clubIntroduce === '') {
       Alert.alert('내용을 채워주세요');
       this.setState({isSubmitting: false});
     } else {
@@ -225,22 +277,38 @@ class Container extends Component {
       formData.append('clubIntroduce', clubIntroduce);
       formData.append('userNo', getUserNo);
       formData.append('school', getSchool);
+      formData.append('clubSize', clubSize);
+      formData.append('clubAutonomous', clubAutonomous);
+      formData.append('clubFunny', clubFunny);
+      formData.append('clubFriendship', clubFriendship);
 
-      if (clubLogo == null) {
-        formData.append('clubLogo', null);
+      if (clubLogo_high == null) {
+        formData.append('clubLogo_high', null);
+        formData.append('clubLogo_low', null);
       } else {
-        formData.append('clubLogo', {
-          uri: clubLogo,
+        formData.append('clubLogo_high', {
+          uri: clubLogo_high,
+          name: 'image.jpeg',
+          type: 'image/jpeg',
+        });
+        formData.append('clubLogo_low', {
+          uri: clubLogo_high,
           name: 'image.jpeg',
           type: 'image/jpeg',
         });
       }
 
-      if (clubMainPicture == null) {
-        formData.append('clubMainPicture', null);
+      if (clubMainPicture_high == null) {
+        formData.append('clubMainPicture_high', null);
+        formData.append('clubMainPicture_low', null);
       } else {
-        formData.append('clubMainPicture', {
-          uri: clubMainPicture,
+        formData.append('clubMainPicture_high', {
+          uri: clubMainPicture_high,
+          name: 'image.jpeg',
+          type: 'image/jpeg',
+        });
+        formData.append('clubMainPicture_low', {
+          uri: clubMainPicture_high,
           name: 'image.jpeg',
           type: 'image/jpeg',
         });
@@ -254,15 +322,14 @@ class Container extends Component {
           'content-type': 'multipart/form-data',
         },
       });
-
-      this.props.navigation.navigate('MakeChars', {
-        userNo: getUserNo,
-      });
     }
+    this.props.navigation.navigate('MakeChars', {
+      userNo: getUserNo,
+    });
   };
 
   // 정보 수정 함수
-  _updatRegister = async () => {
+  _updateClub = async () => {
     //userNo 가지고 오기
     const {navigation} = this.props;
     var getUserNo = navigation.getParam('userNo', 'NO-ID');
@@ -273,8 +340,12 @@ class Container extends Component {
       clubKind,
       clubPhoneNumber,
       clubIntroduce,
-      clubLogo,
-      clubMainPicture,
+      clubLogo_high,
+      clubMainPicture_high,
+      clubSize,
+      clubAutonomous,
+      clubFunny,
+      clubFriendship,
     } = this.state;
 
     if (clubName == '' || clubPhoneNumber == '' || clubIntroduce == '') {
@@ -287,22 +358,38 @@ class Container extends Component {
       formData.append('clubPhoneNumber', clubPhoneNumber);
       formData.append('clubIntroduce', clubIntroduce);
       formData.append('userNo', getUserNo);
+      formData.append('clubSize', clubSize);
+      formData.append('clubAutonomous', clubAutonomous);
+      formData.append('clubFunny', clubFunny);
+      formData.append('clubFriendship', clubFriendship);
 
-      if (clubLogo == null || clubLogo == 'ul') {
-        formData.append('clubLogo', null);
+      if (clubLogo_high == null || clubLogo_high == 'ul') {
+        formData.append('clubLogo_high', null);
+        formData.append('clubLogo_low', null);
       } else {
-        formData.append('clubLogo', {
-          uri: clubLogo,
+        formData.append('clubLogo_high', {
+          uri: clubLogo_high,
+          name: 'image.jpeg',
+          type: 'image/jpeg',
+        });
+        formData.append('clubLogo_low', {
+          uri: clubLogo_high,
           name: 'image.jpeg',
           type: 'image/jpeg',
         });
       }
 
-      if (clubMainPicture == null || clubMainPicture == 'ul') {
-        formData.append('clubMainPicture', null);
+      if (clubMainPicture_high == null || clubMainPicture_high == 'ul') {
+        formData.append('clubMainPicture_high', null);
+        formData.append('clubMainPicture_low', null);
       } else {
-        formData.append('clubMainPicture', {
-          uri: clubMainPicture,
+        formData.append('clubMainPicture_high', {
+          uri: clubMainPicture_high,
+          name: 'image.jpeg',
+          type: 'image/jpeg',
+        });
+        formData.append('clubMainPicture_low', {
+          uri: clubMainPicture_high,
           name: 'image.jpeg',
           type: 'image/jpeg',
         });
@@ -316,22 +403,24 @@ class Container extends Component {
           'content-type': 'multipart/form-data',
         },
       });
-      if (this.props.navigation.getParam('from', 'NO-ID') == 'm') {
-        this.props.navigation.goBack();
-      } else {
-        this.props.navigation.navigate('MakeChars', {
-          userNo: getUserNo,
-        });
-      }
     }
   };
 
   _deleteImages = async () => {
-    const {prevClubLogo, prevClubMainPicture} = this.state;
+    const {navigation} = this.props;
+    var getUserNo = navigation.getParam('userNo', 'NO-ID');
+    const {
+      prevClubLogo_low,
+      prevClubMainPicture_low,
+      prevClubLogo_high,
+      prevClubMainPicture_high,
+    } = this.state;
 
     let formData = new FormData();
-    formData.append('clubLogo', prevClubLogo);
-    formData.append('clubMainPicture', prevClubMainPicture);
+    formData.append('clubLogo_low', prevClubLogo_low);
+    formData.append('clubMainPicture_low', prevClubMainPicture_low);
+    formData.append('clubLogo_high', prevClubLogo_high);
+    formData.append('clubMainPicture_high', prevClubMainPicture_high);
 
     await fetch('http://13.209.221.206/php/MakeClub/DeleteClubImages.php', {
       method: 'POST',
@@ -340,12 +429,19 @@ class Container extends Component {
         'content-type': 'multipart/form-data',
       },
     });
+    if (this.props.navigation.getParam('from', 'NO-ID') == 'm') {
+      this.props.navigation.goBack();
+    } else {
+      this.props.navigation.navigate('MakeChars', {
+        userNo: getUserNo,
+      });
+    }
   };
 
   _btnPress = async () => {
     this.setState({isSubmitting: true});
     if (this.props.navigation.getParam('from', 'NO-ID') == 'm') {
-      await this._updatRegister();
+      await this._updateClub();
       this._deleteImages();
     } else {
       this._notUpdate();
@@ -366,6 +462,22 @@ class Container extends Component {
 
   _clubPhoneNumberChange = clubPhoneNumber => {
     this.setState({clubPhoneNumber});
+  };
+
+  _clubSizeChange = clubSize => {
+    this.setState({clubSize});
+  };
+
+  _clubAutonomousChange = clubAutonomous => {
+    this.setState({clubAutonomous});
+  };
+
+  _clubFunnyChange = clubFunny => {
+    this.setState({clubFunny});
+  };
+
+  _clubFriendshipChange = clubFriendship => {
+    this.setState({clubFriendship});
   };
 
   // 테두리 색 변경 효과

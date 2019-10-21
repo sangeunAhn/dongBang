@@ -23,7 +23,7 @@ class Container extends React.Component {
     return <ClubRecordPictures {...this.state} {...this.props} />;
   }
 
-  componentWillMount = () => {
+  UNSAFE_componentWillMount = () => {
     this._getDatas();
     BackHandler.addEventListener(
       'hardwareBackPress',
@@ -31,7 +31,7 @@ class Container extends React.Component {
     );
   };
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     BackHandler.removeEventListener(
       'hardwareBackPress',
       this._handleBackButtonClick,
