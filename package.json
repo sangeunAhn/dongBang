@@ -10,6 +10,7 @@
   "dependencies": {
     "@bam.tech/react-native-make": "^1.0.2",
     "@react-native-community/async-storage": "^1.6.1",
+    "@react-native-seoul/kakao-login": "^2.1.0",
     "axios": "^0.18.0",
     "generator-rn-toolbox": "^3.14.0",
     "global": "^4.4.0",
@@ -33,8 +34,6 @@
     "react-native-kakao-logins": "^1.3.8",
     "react-native-keyboard-aware-scroll-view": "^0.9.1",
     "react-native-linear-gradient": "^2.5.6",
-    "react-native-masonry": "^0.5.0-alpha.5",
-    "react-native-masonry-list": "^2.13.0",
     "react-native-material-textfield": "^0.12.0",
     "react-native-pages": "^0.7.0",
     "react-native-pathjs-charts": "^0.0.34",
