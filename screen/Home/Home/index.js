@@ -89,7 +89,7 @@ export default class example extends Component {
       />
     );
   }
-  _responseInfoCallback(error: ?Object, result: ?Object) {
+  _responseInfoCallback(error, result) {
     if (error) {
       console.log('Error fetching data: ' + error.toString());
     } else {
