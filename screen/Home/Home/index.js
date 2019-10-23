@@ -21,9 +21,15 @@ import styles, {colors} from '../../../components/Snap/index.style';
 import {ENTRIES1, ENTRIES2} from '../../../components/Snap/entries';
 import MainButton from '../../../components/Button/MainButton';
 import Modal from 'react-native-simple-modal';
-import RNKakao from 'rn-kakao-login';
+// import RNKakao from 'rn-kakao-login';
 
-import {LoginButton, AccessToken} from 'react-native-fbsdk';
+import {
+  LoginButton,
+  LoginManager,
+  AccessToken,
+  GraphRequest,
+  GraphRequestManager,
+} from 'react-native-fbsdk';
 
 const {width, height} = Dimensions.get('window');
 
@@ -38,16 +44,16 @@ function wp(percentage) {
 
 export default class example extends Component {
   kakaoLogin = async () => {
-    try {
-      const result = await RNKakao.login();
-      this.setState({
-        userInfo: JSON.stringify(result),
-      });
-    } catch (e) {
-      this.setState({
-        userInfo: `Error: ${e}`,
-      });
-    }
+    // try {
+    //   const result = await RNKakao.login();
+    //   this.setState({
+    //     userInfo: JSON.stringify(result),
+    //   });
+    // } catch (e) {
+    //   this.setState({
+    //     userInfo: `Error: ${e}`,
+    //   });
+    // }
   };
 
   state = {open: false};
@@ -83,7 +89,13 @@ export default class example extends Component {
       />
     );
   }
-
+  _responseInfoCallback(error, result) {
+    if (error) {
+      console.log('Error fetching data: ' + error.toString());
+    } else {
+      console.log(result);
+    }
+  }
   mainExample(number, title) {
     const {slider1ActiveSlide} = this.state;
 
@@ -173,14 +185,37 @@ export default class example extends Component {
               </Text>
             </TouchableOpacity>
             <LoginButton
+              permissions={[
+                'email',
+                'user_gender',
+                'user_birthday',
+                'public_profile',
+              ]}
               onLoginFinished={(error, result) => {
                 if (error) {
                   console.log('login has error: ' + result.error);
                 } else if (result.isCancelled) {
                   console.log('login is cancelled.');
                 } else {
+                  console.log(result);
                   AccessToken.getCurrentAccessToken().then(data => {
                     console.log(data.accessToken.toString());
+                    const infoRequest = new GraphRequest(
+                      '/me',
+                      {
+                        parameters: {
+                          fields: {
+                            string:
+                              'email,name,first_name,last_name,birthday,gender',
+                          },
+                          access_token: {
+                            string: data.accessToken.toString(),
+                          },
+                        },
+                      },
+                      this._responseInfoCallback,
+                    );
+                    new GraphRequestManager().addRequest(infoRequest).start();
                   });
                 }
               }}

@@ -39,6 +39,9 @@ target 'dongBang' do
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
+  pod 'FBSDKShareKit'
 
   target 'dongBangTests' do
     inherit! :search_paths
