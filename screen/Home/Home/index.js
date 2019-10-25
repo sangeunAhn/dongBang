@@ -185,12 +185,6 @@ export default class example extends Component {
               </Text>
             </TouchableOpacity>
             <LoginButton
-              permissions={[
-                'email',
-                'user_gender',
-                'user_birthday',
-                'public_profile',
-              ]}
               onLoginFinished={(error, result) => {
                 if (error) {
                   console.log('login has error: ' + result.error);
