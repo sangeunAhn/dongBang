@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import * as MagicMove from 'react-native-magic-move';
 
 const {width, height} = Dimensions.get('window');
 
@@ -29,7 +30,9 @@ export default class MasonryList extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <>
+     <MagicMove.Scene>
+      <MagicMove.View id="logo" style={styles.container}>
         {this.state.recordsLoading ? (
           <View style={styles.loading}>
             <ActivityIndicator size="large" />
@@ -82,7 +85,10 @@ export default class MasonryList extends React.Component {
             </TouchableOpacity>
           ))}
         </View>
-      </View>
+      
+      </MagicMove.View>
+      </MagicMove.Scene>
+      </>
     );
   }
 }
@@ -105,10 +111,10 @@ const styles = StyleSheet.create({
   },
   leftView: {
     flex: 1,
-    marginRight: 3.5, // backgroundColor: 'blue',
+    marginRight: 3.5, // backgroundColor: 'blue',
   },
   rightView: {
     flex: 1,
-    marginLeft: 3.5, // backgroundColor: 'red',
+    marginLeft: 3.5, // backgroundColor: 'red',
   },
 });

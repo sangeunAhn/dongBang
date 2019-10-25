@@ -8,6 +8,8 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import * as MagicMove from 'react-native-magic-move';
+
 
 const {height, width} = Dimensions.get('window');
 
@@ -31,7 +33,8 @@ export default class Pictures extends React.Component {
   render() {
     return (
       <>
-        <View style={styles.container}>
+       <MagicMove.Scene>
+       <MagicMove.View id="logo" style={styles.container}>
           <View style={[styles.imageView, {height: this.state.height}]}>
             <FastImage
               style={{
@@ -50,7 +53,8 @@ export default class Pictures extends React.Component {
           <View style={styles.bottom}>
             <Text style={styles.text}>{this.props.text}</Text>
           </View>
-        </View>
+        </MagicMove.View>
+        </MagicMove.Scene>
       </>
     );
   }

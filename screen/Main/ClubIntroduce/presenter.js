@@ -142,12 +142,17 @@ const ClubIntroduce = props => (
           </View>
 
           <View
-            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            style={{flex: 1, }}>
+           <View style={{marginLeft:width*0.06, marginTop:height*0.08, marginBottom:height*0.1}}>
+             <Text style={{fontSize:width*0.08, color:'#636363'}}>우리 {"\n"}동아리/모임은요</Text>
+           </View>
+           <View style={{backgroundColor:'white'}}>
             <View
               style={{
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexDirection: 'row',
+                marginVertical:height*0.015,
               }}>
               <Text
                 style={{
@@ -162,11 +167,11 @@ const ClubIntroduce = props => (
                 disabled={true}
                 value={props.clubSize}
                 style={{width: width * 0.6}}
-                minimumTrackTintColor="#E5E5E5"
-                maximumTrackTintColor="#E5E5E5"
-                thumbTintColor="#ADCDE9"
-                thumbStyle={{width: 15, height: 15, borderRadius: 3}}
-                trackStyle={{height: 2}}
+                minimumTrackTintColor="#A9DFE2"
+                maximumTrackTintColor="#D1D5FA"
+                thumbTintColor="white"
+                thumbStyle={{borderWidth:3.5, borderColor:'#ADCDE9', width: 18, height: 18, borderRadius: 18*0.5}}
+                trackStyle={{height: 3}}
               />
               <Text
                 style={{
@@ -178,11 +183,13 @@ const ClubIntroduce = props => (
                 대규모
               </Text>
             </View>
+            <View style={{alignSelf:'center',width:width*0.8, height:0.2, backgroundColor:'#D8D8D8'}}/>
             <View
               style={{
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexDirection: 'row',
+                marginVertical:height*0.015,
               }}>
               <Text
                 style={{
@@ -195,13 +202,13 @@ const ClubIntroduce = props => (
               </Text>
               <Slider
                 disabled={true}
-                value={props.clubAutonomous}
+                value={props.clubSize}
                 style={{width: width * 0.6}}
-                minimumTrackTintColor="#E5E5E5"
-                maximumTrackTintColor="#E5E5E5"
-                thumbTintColor="#ADCDE9"
-                thumbStyle={{width: 15, height: 15, borderRadius: 3}}
-                trackStyle={{height: 2}}
+                minimumTrackTintColor="#A9DFE2"
+                maximumTrackTintColor="#D1D5FA"
+                thumbTintColor="white"
+                thumbStyle={{borderWidth:3.5, borderColor:'#ADCDE9', width: 18, height: 18, borderRadius: 18*0.5}}
+                trackStyle={{height: 3}}
               />
               <Text
                 style={{
@@ -213,11 +220,13 @@ const ClubIntroduce = props => (
                 체계적인
               </Text>
             </View>
+            <View style={{alignSelf:'center',width:width*0.8, height:0.2, backgroundColor:'#D8D8D8'}}/>
             <View
               style={{
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexDirection: 'row',
+                marginVertical:height*0.015,
               }}>
               <Text
                 style={{
@@ -230,13 +239,13 @@ const ClubIntroduce = props => (
               </Text>
               <Slider
                 disabled={true}
-                value={props.clubFunny}
+                value={props.clubSize}
                 style={{width: width * 0.6}}
-                minimumTrackTintColor="#E5E5E5"
-                maximumTrackTintColor="#E5E5E5"
-                thumbTintColor="#ADCDE9"
-                thumbStyle={{width: 15, height: 15, borderRadius: 3}}
-                trackStyle={{height: 2}}
+                minimumTrackTintColor="#A9DFE2"
+                maximumTrackTintColor="#D1D5FA"
+                thumbTintColor="white"
+                thumbStyle={{borderWidth:3.5, borderColor:'#ADCDE9', width: 18, height: 18, borderRadius: 18*0.5}}
+                trackStyle={{height: 3}}
               />
               <Text
                 style={{
@@ -248,11 +257,13 @@ const ClubIntroduce = props => (
                 진지한
               </Text>
             </View>
+            <View style={{alignSelf:'center',width:width*0.8, height:0.2, backgroundColor:'#D8D8D8'}}/>
             <View
               style={{
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexDirection: 'row',
+                marginVertical:height*0.015,
               }}>
               <Text
                 style={{
@@ -265,13 +276,13 @@ const ClubIntroduce = props => (
               </Text>
               <Slider
                 disabled={true}
-                value={props.clubFriendship}
+                value={props.clubSize}
                 style={{width: width * 0.6}}
-                minimumTrackTintColor="#E5E5E5"
-                maximumTrackTintColor="#E5E5E5"
-                thumbTintColor="#ADCDE9"
-                thumbStyle={{width: 15, height: 15, borderRadius: 3}}
-                trackStyle={{height: 2}}
+                minimumTrackTintColor="#A9DFE2"
+                maximumTrackTintColor="#D1D5FA"
+                thumbTintColor="white"
+                thumbStyle={{borderWidth:3.5, borderColor:'#ADCDE9', width: 18, height: 18, borderRadius: 18*0.5}}
+                trackStyle={{height: 3}}
               />
               <Text
                 style={{
@@ -282,6 +293,8 @@ const ClubIntroduce = props => (
                 }}>
                 활동중심
               </Text>
+            </View>
+            <View style={{alignSelf:'center',width:width*0.8, height:0.2, backgroundColor:'#D8D8D8'}}/>
             </View>
             <View style={styles.chars}>
               {props.clubChar.map((char, index) => (

@@ -15,9 +15,13 @@ import Record from './screen/Main/ClubRecord';
 import Login from './screen/Login/Login';
 import SignUp from './screen/Login/SignUp';
 import SignUpPermission from './screen/Login/SignUpPermission';
+import * as MagicMove from 'react-native-magic-move';
+
 
 const RootStack = createStackNavigator(
+ 
   {
+    
     Home: {
       screen: Home,
     },
@@ -72,6 +76,7 @@ export default class App extends React.Component {
   render() {
     return (
       <>
+       <MagicMove.Provider>
         <AppContainer />
         <StatusBar
           barStyle="dark-content"
@@ -84,6 +89,7 @@ export default class App extends React.Component {
           //allowing light, but not detailed shapes
           networkActivityIndicatorVisible={true}
         />
+        </MagicMove.Provider>
       </>
     );
   }

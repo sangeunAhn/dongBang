@@ -105,8 +105,8 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: width * 0.06,
-    fontWeight: '600',
-    color: '#3B3B3B',
+    fontWeight: 'bold',
+    color: '#707070',
   },
   address: {
     marginLeft: height * 0.027,

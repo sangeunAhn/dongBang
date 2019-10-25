@@ -7429,6 +7429,11 @@ react-navigation-fluid-transitions@^0.3.2:
     lodash.sortby "*"
     prop-types "*"
 
+react-navigation-magic-move@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/react-navigation-magic-move/-/react-navigation-magic-move-0.4.1.tgz#20ab093b409ac03b87c5cc6c26be4e45ce8a61b4"
+  integrity sha512-b92wb5n+L/vafUY+Fdhp/0faTRqsq19c/QDpBOyKn/zuqrr/SQpsv6RrZxqBVNPpQVjXhMG3wUL49Sy8qsSEUw==
+
 react-navigation-stack@~1.5.0:
   version "1.5.4"
   resolved "https://registry.yarnpkg.com/react-navigation-stack/-/react-navigation-stack-1.5.4.tgz#ec3f8468873b86aa2b344430dfc1d7e9801e39bd"
