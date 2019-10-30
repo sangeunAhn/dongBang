@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {
   TouchableOpacity,
-  Text,
+  
   StyleSheet,
   View,
   Image,
@@ -12,84 +12,108 @@ import ClubChars from '../../Char/ClubChars';
 import {moderateScale} from '../../Scaling';
 import TouchMainPicture from '../TouchMainPicture';
 import FastImage from 'react-native-fast-image';
+import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
+
 
 const {width, height} = Dimensions.get('window');
 
 const ClubView = props => (
-  <View style={styles.container}>
-    <View style={styles.clubViewTop}>
-      <View elevation={5} style={styles.logo}>
-        {props.clubLogo === null || props.clubLogo == '' ? (
-          <View style={styles.Image} backgroundColor={'#ADCDE9'} />
-        ) : (
-          <FastImage style={styles.Image} source={{uri: props.clubLogo}} />
-        )}
-      </View>
-
-      <View style={styles.club}>
-        <Text style={styles.clubTitle}>{props.clubName}</Text>
-        <Text style={styles.clubChar}>
-          {props.clubChar.map((char, i) => {
+<TouchableOpacity onPress={props.gotoClubIntroduce} style={{marginHorizontal:8}}>
+  
+  <Card style={{ borderRadius: 15 }}>
+  <CardItem cardBody bordered style={{ borderTopLeftRadius: 15, borderTopRightRadius: 15 }}>
+  <Image source={{uri: props.clubMainPicture}} style={{borderTopLeftRadius: 15, borderTopRightRadius: 15, height: 180, width: null, flex: 1}}/>
+  </CardItem>
+  <CardItem  cardFooter bordered style={{ borderBottomLeftRadius: 15, borderBottomRightRadius: 15 }} >
+   
+ 
+  <Left>
+      <Thumbnail style={{width:40, height:40}} source={{uri: props.clubLogo}} />
+      <Body>
+        <Text  style={{fontSize:20, }}>{props.clubName}</Text>
+        <Text note> {props.clubChar.map((char, i) => {
             return <ClubChars chars={char} key={i} />;
-          })}
-        </Text>
-      </View>
-    </View>
+         })}</Text>
+      </Body>
+    </Left>
+    </CardItem>
+</Card>
 
-    <View style={styles.shadow}>
-      <TouchableOpacity onPress={props.press}>
-        {props.clubMainPicture === null ||
-        props.clubMainPicture === 'ul' ||
-        props.clubMainPicture == '' ? (
-          props.disabled == true ? (
-            <View style={styles.picture} />
-          ) : (
-            <>
-              {props.clubLogo === null ||
-              props.clubLogo === 'ul' ||
-              props.clubLogo == '' ? (
-                <TouchMainPicture
-                  gotoClubIntroduce={props.gotoClubIntroduce}
-                  gotoRecord={props.gotoRecord}
-                  clubMainPicture={null}
-                  clubLogo={null}
-                />
-              ) : (
-                <TouchMainPicture
-                  gotoClubIntroduce={props.gotoClubIntroduce}
-                  gotoRecord={props.gotoRecord}
-                  clubMainPicture={null}
-                  clubLogo={props.clubLogo}
-                />
-              )}
-            </>
-          )
-        ) : (
-          <>
-            {props.clubLogo === null ||
-            props.clubLogo === 'ul' ||
-            props.clubLogo == '' ? (
-              <TouchMainPicture
-                gotoClubIntroduce={props.gotoClubIntroduce}
-                gotoRecord={props.gotoRecord}
-                clubMainPicture={props.clubMainPicture}
-                clubLogo={null}
-                disabled={props.disabled}
-              />
-            ) : (
-              <TouchMainPicture
-                gotoClubIntroduce={props.gotoClubIntroduce}
-                gotoRecord={props.gotoRecord}
-                clubMainPicture={props.clubMainPicture}
-                clubLogo={props.clubLogo}
-                disabled={props.disabled}
-              />
-            )}
-          </>
-        )}
-      </TouchableOpacity>
-    </View>
-  </View>
+</TouchableOpacity>
+  // <View style={styles.container}>
+  //   <View style={styles.clubViewTop}>
+  //     <View elevation={5} style={styles.logo}>
+  //       {props.clubLogo === null || props.clubLogo == '' ? (
+  //         <View style={styles.Image} backgroundColor={'#ADCDE9'} />
+  //       ) : (
+  //         <FastImage style={styles.Image} source={{uri: props.clubLogo}} />
+  //       )}
+  //     </View>
+
+  //     <View style={styles.club}>
+  //       <Text style={styles.clubTitle}>{props.clubName}</Text>
+  //       <Text style={styles.clubChar}>
+  //         {props.clubChar.map((char, i) => {
+  //           return <ClubChars chars={char} key={i} />;
+  //         })}
+  //       </Text>
+  //     </View>
+  //   </View>
+
+  //   <View style={styles.shadow}>
+  //     <TouchableOpacity onPress={props.press}>
+  //       {props.clubMainPicture === null ||
+  //       props.clubMainPicture === 'ul' ||
+  //       props.clubMainPicture == '' ? (
+  //         props.disabled == true ? (
+  //           <View style={styles.picture} />
+  //         ) : (
+  //           <>
+  //             {props.clubLogo === null ||
+  //             props.clubLogo === 'ul' ||
+  //             props.clubLogo == '' ? (
+  //               <TouchMainPicture
+  //                 gotoClubIntroduce={props.gotoClubIntroduce}
+  //                 gotoRecord={props.gotoRecord}
+  //                 clubMainPicture={null}
+  //                 clubLogo={null}
+  //               />
+  //             ) : (
+  //               <TouchMainPicture
+  //                 gotoClubIntroduce={props.gotoClubIntroduce}
+  //                 gotoRecord={props.gotoRecord}
+  //                 clubMainPicture={null}
+  //                 clubLogo={props.clubLogo}
+  //               />
+  //             )}
+  //           </>
+  //         )
+  //       ) : (
+  //         <>
+  //           {props.clubLogo === null ||
+  //           props.clubLogo === 'ul' ||
+  //           props.clubLogo == '' ? (
+  //             <TouchMainPicture
+  //               gotoClubIntroduce={props.gotoClubIntroduce}
+  //               gotoRecord={props.gotoRecord}
+  //               clubMainPicture={props.clubMainPicture}
+  //               clubLogo={null}
+  //               disabled={props.disabled}
+  //             />
+  //           ) : (
+  //             <TouchMainPicture
+  //               gotoClubIntroduce={props.gotoClubIntroduce}
+  //               gotoRecord={props.gotoRecord}
+  //               clubMainPicture={props.clubMainPicture}
+  //               clubLogo={props.clubLogo}
+  //               disabled={props.disabled}
+  //             />
+  //           )}
+  //         </>
+  //       )}
+  //     </TouchableOpacity>
+  //   </View>
+  // </View>
 );
 
 const styles = StyleSheet.create({
@@ -164,7 +188,7 @@ const styles = StyleSheet.create({
     marginTop: height * 0.016,
     borderRadius: height * 0.02,
 
-    width: width * 0.9,
+    width: width * 0.95,
     height: height * 0.24,
     shadowColor: '#B8B8B8', // IOS
     shadowOffset: {height: height * 0.008, width: 1}, // IOS
@@ -179,7 +203,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#CEE1F2',
     borderRadius: height * 0.019,
 
-    width: width * 0.9,
+    width: width * 0.95,
     height: height * 0.245,
   },
   picture2: {
@@ -187,7 +211,7 @@ const styles = StyleSheet.create({
     // alignItems:'flex-start',
     // justifyContent:'flex-start',
     borderRadius: height * 0.019,
-    width: width * 0.9,
+    width: width * 0.95,
     height: height * 0.245,
   },
 });

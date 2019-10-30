@@ -42,6 +42,7 @@ class Container extends Component {
         {...this.props}
         imageViewVisible1={this._imageViewVisible1}
         imageViewVisible2={this._imageViewVisible2}
+        gotoRecord={this._gotoRecord}
       />
     );
   }
@@ -75,7 +76,14 @@ class Container extends Component {
       this._handleBackButtonClick,
     );
   }
-
+  _gotoRecord = () => {
+    this._onClose();
+    this.props.navigation.navigate('Record', {
+      clubName: this.props.clubName,
+      school: this.props.school,
+    });
+  };
+  
   _getDatas = async () => {
     const t = this;
     const {navigation} = this.props;

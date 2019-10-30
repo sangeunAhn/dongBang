@@ -135,13 +135,13 @@ const styles = StyleSheet.create({
     zIndex: 0,
 
     borderRadius: 13,
-    width: width * 0.9,
+    width: width * 0.95,
     height: height * 0.245,
   },
   picture2: {
     zIndex: 0,
     borderRadius: 13,
-    width: width * 0.9,
+    width: width * 0.95,
     height: height * 0.245,
   },
   text: {
