@@ -77,10 +77,11 @@ class Container extends Component {
     );
   }
   _gotoRecord = () => {
-    this._onClose();
+    var school = navigation.getParam('school', 'NO-ID');
+    
     this.props.navigation.navigate('Record', {
-      clubName: this.props.clubName,
-      school: this.props.school,
+      clubName: this.state.clubName,
+      school,
     });
   };
   

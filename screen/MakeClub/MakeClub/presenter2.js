@@ -513,7 +513,7 @@ const styles = StyleSheet.create({
     width: width * 0.9,
     height: height * 0.23,
     borderRadius: height * 0.024,
-    backgroundColor: '#CEE1F2',
+    backgroundColor: '#DAE5F7',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -527,7 +527,7 @@ const styles = StyleSheet.create({
     height: width * 0.27,
     top: -width * 0.07,
     zIndex: 1,
-    backgroundColor: '#ADCDE9',
+    backgroundColor: '#B4CBEA',
     borderRadius: width * 0.27 * 0.5,
   },
   photoAddLogo: {
