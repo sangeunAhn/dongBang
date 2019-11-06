@@ -6,12 +6,7 @@ const {width, height} = Dimensions.get('window');
 
 const ClubDiv = props => (
   <View style={styles.container}>
-    <View style={{paddingHorizontal: width * 0.03}}>
-      <Text style={styles.menuTitle}>{props.clubKind}</Text>
-      <View style={{alignItems: 'flex-end', marginBottom: height * 0.032}}>
-        <View style={styles.line} />
-      </View>
-    </View>
+    
     {props.clubName.map((name, i) => {
       return (
         <ClubView

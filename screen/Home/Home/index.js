@@ -10,6 +10,8 @@ import {
   TouchableOpacity,
   Dimensions,
   Alert,
+  ToastAndroid,
+  BackHandler
 } from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {
@@ -21,15 +23,8 @@ import styles, {colors} from '../../../components/Snap/index.style';
 import {ENTRIES1, ENTRIES2} from '../../../components/Snap/entries';
 import MainButton from '../../../components/Button/MainButton';
 import Modal from 'react-native-simple-modal';
-// import RNKakao from 'rn-kakao-login';
 
-import {
-  LoginButton,
-  LoginManager,
-  AccessToken,
-  GraphRequest,
-  GraphRequestManager,
-} from 'react-native-fbsdk';
+
 
 const {width, height} = Dimensions.get('window');
 
@@ -43,18 +38,43 @@ function wp(percentage) {
 }
 
 export default class example extends Component {
-  kakaoLogin = async () => {
-    // try {
-    //   const result = await RNKakao.login();
-    //   this.setState({
-    //     userInfo: JSON.stringify(result),
-    //   });
-    // } catch (e) {
-    //   this.setState({
-    //     userInfo: `Error: ${e}`,
-    //   });
-    // }
-  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      slider1ActiveSlide: SLIDER_1_FIRST_ITEM,
+    };
+  }
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+}
+
+// 이벤트 해제
+componentWillUnmount() {
+    this.exitApp = false;
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+}
+  // 이벤트 동작
+  handleBackButton = () => {
+    // 2000(2초) 안에 back 버튼을 한번 더 클릭 할 경우 앱 종료
+    if (this.exitApp == undefined || !this.exitApp) {
+        ToastAndroid.show('한번 더 누르시면 종료됩니다.', ToastAndroid.SHORT);
+        this.exitApp = true;
+
+        this.timeout = setTimeout(
+            () => {
+                this.exitApp = false;
+            },
+            2000    // 2초
+        );
+    } else {
+        clearTimeout(this.timeout);
+
+        BackHandler.exitApp();  // 앱 종료
+    }
+    return true;
+}
+
 
   state = {open: false};
   openModal = () => this.setState({open: true});
@@ -68,12 +88,7 @@ export default class example extends Component {
   static navigationOptions = {
     header: null,
   };
-  constructor(props) {
-    super(props);
-    this.state = {
-      slider1ActiveSlide: SLIDER_1_FIRST_ITEM,
-    };
-  }
+
 
   _renderItem({item, index}) {
     return <SliderEntry data={item} even={(index + 1) % 2 === 0} />;
@@ -89,13 +104,7 @@ export default class example extends Component {
       />
     );
   }
-  _responseInfoCallback(error, result) {
-    if (error) {
-      console.log('Error fetching data: ' + error.toString());
-    } else {
-      console.log(result);
-    }
-  }
+
   mainExample(number, title) {
     const {slider1ActiveSlide} = this.state;
 
@@ -161,20 +170,13 @@ export default class example extends Component {
           <View
             style={{
               flex: 1,
-              marginTop: height * 0.03,
+              marginTop:height*0.03,
               justifyContent: 'flex-start',
               alignItems: 'center',
             }}>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Schools')}>
-              <Text
-                style={{
-                  color: '#3B3B3B',
-                  fontWeight: 'bold',
-                  fontSize: height * 0.04,
-                }}>
-                들어가기
-              </Text>
+          
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Schools')} >
+            <Text style={{color:'#3B3B3B', fontWeight:'bold',fontSize:height*0.04}}>들어가기</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{marginTop: height * 0.01, padding: 10}}
@@ -184,37 +186,7 @@ export default class example extends Component {
                 동아리 생성 / 수정{' '}
               </Text>
             </TouchableOpacity>
-            <LoginButton
-              onLoginFinished={(error, result) => {
-                if (error) {
-                  console.log('login has error: ' + result.error);
-                } else if (result.isCancelled) {
-                  console.log('login is cancelled.');
-                } else {
-                  console.log(result);
-                  AccessToken.getCurrentAccessToken().then(data => {
-                    console.log(data.accessToken.toString());
-                    const infoRequest = new GraphRequest(
-                      '/me',
-                      {
-                        parameters: {
-                          fields: {
-                            string:
-                              'email,name,first_name,last_name,birthday,gender',
-                          },
-                          access_token: {
-                            string: data.accessToken.toString(),
-                          },
-                        },
-                      },
-                      this._responseInfoCallback,
-                    );
-                    new GraphRequestManager().addRequest(infoRequest).start();
-                  });
-                }
-              }}
-              onLogoutFinished={() => console.log('logout.')}
-            />
+            
           </View>
           <View
             style={{
@@ -225,7 +197,7 @@ export default class example extends Component {
             <View style={{alignItems: 'flex-start'}}>
               <TouchableOpacity
                 style={{padding: height * 0.02}}
-                onPress={() => this.kakaoLogin()}>
+                >
                 <Text style={{color: '#888888', fontSize: height * 0.018}}>
                   문의하기
                 </Text>

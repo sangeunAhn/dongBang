@@ -76,8 +76,8 @@ class Container extends Component {
       this._handleBackButtonClick,
     );
   }
-  _gotoRecord = () => {
-    var school = navigation.getParam('school', 'NO-ID');
+  _gotoRecord = () => { 
+    var school = this.props.navigation.getParam('school', 'NO-ID');
     
     this.props.navigation.navigate('Record', {
       clubName: this.state.clubName,

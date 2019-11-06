@@ -16,6 +16,7 @@ import Login from './screen/Login/Login';
 import SignUp from './screen/Login/SignUp';
 import SignUpPermission from './screen/Login/SignUpPermission';
 import * as MagicMove from 'react-native-magic-move';
+import { MenuProvider } from 'react-native-popup-menu';
 
 
 const RootStack = createStackNavigator(
@@ -76,7 +77,7 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-       <MagicMove.Provider>
+     <MenuProvider>
         <AppContainer />
         <StatusBar
           barStyle="dark-content"
@@ -89,7 +90,7 @@ export default class App extends React.Component {
           //allowing light, but not detailed shapes
           networkActivityIndicatorVisible={true}
         />
-        </MagicMove.Provider>
+     </MenuProvider>
       </>
     );
   }

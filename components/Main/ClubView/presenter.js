@@ -29,9 +29,9 @@ const ClubView = props => (
  
   <Left>
       <Thumbnail style={{width:40, height:40}} source={{uri: props.clubLogo}} />
-      <Body>
+      <Body style={{flexWrap:'nowrap'}}>
         <Text  style={{fontSize:20, }}>{props.clubName}</Text>
-        <Text note> {props.clubChar.map((char, i) => {
+        <Text  note> {props.clubChar.map((char, i) => {
             return <ClubChars chars={char} key={i} />;
          })}</Text>
       </Body>
